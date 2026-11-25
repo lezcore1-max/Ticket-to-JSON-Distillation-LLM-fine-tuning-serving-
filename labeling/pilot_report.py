@@ -6,7 +6,8 @@ Reference signals (none of them is the final gold standard; the hand-checked tes
   - hint_product                    : account tier we injected (e.g. "gold account")
 urgency / sentiment have no reference -> we report distributions and list samples to eyeball.
 
-  python -m labeling.pilot_report --labels data/labeled/pilot.jsonl --out labeling/pilot_report.md
+  python -m labeling.pilot_report --labels data/labeled/pilot_lite.jsonl --out labeling/pilot_report.md \
+      --compare data/labeled/pilot_flash.jsonl
 """
 from __future__ import annotations
 
@@ -30,6 +31,7 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--labels", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--compare", type=Path, default=None, help="labels from a second teacher, same ids")
     args = ap.parse_args()
 
     ref = {r["id"]: r for s in ("train", "val", "test") for r in load_jsonl(PREPARED / f"{s}.jsonl")}
@@ -67,12 +69,34 @@ def main() -> None:
     for fld in ("urgency", "sentiment"):
         c = Counter(y[fld] for _, y, _ in rows)
         L.append(f"- {fld}: " + ", ".join(f"{k} {v}" for k, v in c.most_common()))
-    lat = [l["latency_s"] for _, _, l in rows]
-    pt = [l["usage"]["prompt_tokens"] or 0 for _, _, l in rows]
-    ot = [(l["usage"]["output_tokens"] or 0) + (l["usage"]["thoughts_tokens"] or 0) for _, _, l in rows]
     if rows:
-        L += [f"- latency s: mean {statistics.mean(lat):.2f}, max {max(lat):.2f}",
-              f"- tokens/request: prompt {statistics.mean(pt):.0f}, output incl. thinking {statistics.mean(ot):.0f}", ""]
+        lat = [l["batch"]["latency_s"] for _, _, l in rows]
+        bs = [l["batch"]["batch_size"] for _, _, l in rows]
+        pt = [l["usage_per_row"]["prompt_tokens"] for _, _, l in rows]
+        ot = [l["usage_per_row"]["output_tokens"] + l["usage_per_row"]["thoughts_tokens"] for _, _, l in rows]
+        L += [f"- batch request latency s: mean {statistics.mean(lat):.2f}, max {max(lat):.2f} "
+              f"(batch size mean {statistics.mean(bs):.1f})",
+              f"- tokens per message (batch share): prompt {statistics.mean(pt):.0f}, "
+              f"output incl. thinking {statistics.mean(ot):.0f}", ""]
+
+    if args.compare:
+        other = {l["id"]: l for l in load_jsonl(args.compare)}
+        shared = [(r, y, other[l["id"]]["label"]) for r, y, l in rows if l["id"] in other]
+        o_name = next(iter(other.values()))["teacher"] if other else "?"
+        L += [f"## Teacher vs teacher: `{labs[0]['teacher']}` vs `{o_name}` ({len(shared)} shared messages)", "",
+              "| Field | Agreement |", "|---|---|"]
+        for fld in ("intent", "category", "urgency", "sentiment", "product", "order_id"):
+            same = sum((norm_prod(y[fld]) == norm_prod(z[fld])) if fld == "product" else (y[fld] == z[fld])
+                       for _, y, z in shared)
+            L.append(f"| {fld} | {pct(same, len(shared))} |")
+        L.append("")
+        diffs = [(r["id"], r["text"], f"{y['urgency']}/{y['sentiment']}", f"{z['urgency']}/{z['sentiment']}")
+                 for r, y, z in shared if (y["urgency"], y["sentiment"]) != (z["urgency"], z["sentiment"])]
+        L += [f"### urgency/sentiment disagreements ({len(diffs)}): this teacher vs `{o_name}`", ""]
+        if diffs:
+            L += ["| id | text | this | other |", "|---|---|---|---|"]
+            L += [f"| {i} | {t.replace('|', '/')} | {a} | {b} |" for i, t, a, b in diffs]
+        L.append("")
 
     def table(title, items):
         L.extend([f"## {title} ({len(items)})", ""])
