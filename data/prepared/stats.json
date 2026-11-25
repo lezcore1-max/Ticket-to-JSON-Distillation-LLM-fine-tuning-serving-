@@ -1,0 +1,39 @@
+{
+  "seed": 13,
+  "raw_rows": 26872,
+  "after_template_dedupe": 24025,
+  "sampled": 3500,
+  "split_sizes": {
+    "train": 3000,
+    "val": 300,
+    "test": 200
+  },
+  "n_intents": 27,
+  "per_split_intent_min_max": {
+    "train": [
+      110,
+      112
+    ],
+    "val": [
+      11,
+      12
+    ],
+    "test": [
+      7,
+      8
+    ]
+  },
+  "with_gt_order_id": 369,
+  "with_hint_product": 157,
+  "placeholders_filled": {
+    "Order Number": 369,
+    "Delivery City": 6,
+    "Account Type": 87,
+    "Person Name": 105,
+    "Currency Symbol": 30,
+    "Refund Amount": 46,
+    "Account Category": 70,
+    "Invoice Number": 1,
+    "Delivery Country": 5
+  }
+}

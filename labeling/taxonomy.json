@@ -1,0 +1,31 @@
+{
+  "intents": {
+    "create_account":           {"category": "account",      "description": "wants to open / sign up for a new account"},
+    "delete_account":           {"category": "account",      "description": "wants to close, remove or deactivate an account"},
+    "edit_account":             {"category": "account",      "description": "wants to change account details (name, email, profile, plan settings)"},
+    "recover_password":         {"category": "account",      "description": "forgot / wants to reset a password or regain access"},
+    "registration_problems":    {"category": "account",      "description": "reports an error or problem while trying to sign up"},
+    "switch_account":           {"category": "account",      "description": "wants to move to a different account or change account type/tier"},
+    "check_cancellation_fee":   {"category": "cancel",       "description": "asks whether / how much it costs to cancel (early termination fee)"},
+    "contact_customer_service": {"category": "contact",      "description": "asks how to reach customer service (hours, phone, email, chat)"},
+    "contact_human_agent":      {"category": "contact",      "description": "wants to talk to a real person / live agent instead of a bot"},
+    "delivery_options":         {"category": "delivery",     "description": "asks which shipping methods or delivery options exist"},
+    "delivery_period":          {"category": "delivery",     "description": "asks when an order will arrive or how long delivery takes, including late deliveries"},
+    "complaint":                {"category": "feedback",     "description": "wants to file a complaint or expresses dissatisfaction with the service"},
+    "review":                   {"category": "feedback",     "description": "wants to leave feedback, a review or a rating"},
+    "check_invoice":            {"category": "invoice",      "description": "wants to see / look up an existing invoice or bill"},
+    "get_invoice":              {"category": "invoice",      "description": "wants an invoice sent or downloaded"},
+    "cancel_order":             {"category": "order",        "description": "wants to cancel an order"},
+    "change_order":             {"category": "order",        "description": "wants to modify an existing order (items, quantity, details)"},
+    "place_order":              {"category": "order",        "description": "wants to buy something / make a new order"},
+    "track_order":              {"category": "order",        "description": "wants the status or location of an existing order"},
+    "check_payment_methods":    {"category": "payment",      "description": "asks which payment methods are accepted"},
+    "payment_issue":            {"category": "payment",      "description": "reports a problem with a payment (declined, double charged, failed)"},
+    "check_refund_policy":      {"category": "refund",       "description": "asks about the refund / money-back policy or eligibility"},
+    "get_refund":               {"category": "refund",       "description": "wants to request or receive a refund"},
+    "track_refund":             {"category": "refund",       "description": "asks about the status of a refund already requested"},
+    "change_shipping_address":  {"category": "shipping",     "description": "wants to change or correct a shipping address"},
+    "set_up_shipping_address":  {"category": "shipping",     "description": "wants to add / set up a new shipping address"},
+    "newsletter_subscription":  {"category": "subscription", "description": "wants to subscribe to, unsubscribe from, or asks about the newsletter"}
+  }
+}
