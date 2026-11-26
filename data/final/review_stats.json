@@ -1,0 +1,184 @@
+{
+  "reviewer": "claude",
+  "label_source": "claude_checked",
+  "test_rows": 200,
+  "rows_with_any_correction": 18,
+  "share_rows_corrected": 0.09,
+  "teacher_exact_match_vs_reviewed": 0.91,
+  "corrections_per_field": {
+    "intent": 9,
+    "urgency": 8,
+    "product": 1,
+    "order_id": 0,
+    "sentiment": 2
+  },
+  "teacher_field_accuracy_vs_reviewed": {
+    "intent": 0.955,
+    "urgency": 0.96,
+    "product": 0.995,
+    "order_id": 1.0,
+    "sentiment": 0.99
+  },
+  "teacher": [
+    "gemini-3.5-flash-lite"
+  ],
+  "prompt_version": [
+    "v3"
+  ],
+  "train_rows": 3000,
+  "val_rows": 300,
+  "corrections": [
+    {
+      "id": "bx-00140",
+      "text": "I have got to cancel purchase #259275, how do I do it?",
+      "urgency": [
+        "high",
+        "medium"
+      ]
+    },
+    {
+      "id": "bx-00000",
+      "text": "question about cancelling order AY454462",
+      "intent": [
+        "check_cancellation_fee",
+        "cancel_order"
+      ]
+    },
+    {
+      "id": "bx-03739",
+      "text": "I don't know how I can check the fucking withdrawal charges",
+      "urgency": [
+        "high",
+        "medium"
+      ]
+    },
+    {
+      "id": "bx-15251",
+      "text": "I don't know how to get the bill #00108",
+      "intent": [
+        "check_invoice",
+        "get_invoice"
+      ]
+    },
+    {
+      "id": "bx-15708",
+      "text": "what do I have to do to get the invoice from Carlos Gomez?",
+      "intent": [
+        "check_invoice",
+        "get_invoice"
+      ]
+    },
+    {
+      "id": "bx-08712",
+      "text": "I need help speaking with customer support",
+      "intent": [
+        "contact_human_agent",
+        "contact_customer_service"
+      ]
+    },
+    {
+      "id": "bx-26094",
+      "text": "I expect an restitution of $439",
+      "intent": [
+        "get_refund",
+        "track_refund"
+      ]
+    },
+    {
+      "id": "bx-26247",
+      "text": "i expect a compensqtion of 486 dollars",
+      "intent": [
+        "get_refund",
+        "track_refund"
+      ]
+    },
+    {
+      "id": "bx-19353",
+      "text": "how can I purchase several fucking items ?",
+      "urgency": [
+        "low",
+        "medium"
+      ]
+    },
+    {
+      "id": "bx-19458",
+      "text": "how can I order several goddamn articles?",
+      "urgency": [
+        "low",
+        "medium"
+      ]
+    },
+    {
+      "id": "bx-20377",
+      "text": "I cannot reset my profile PIN",
+      "product": [
+        "profile",
+        null
+      ],
+      "sentiment": [
+        "negative",
+        "neutral"
+      ]
+    },
+    {
+      "id": "bx-10451",
+      "text": "have problems with creating a freemium account",
+      "intent": [
+        "registration_problems",
+        "create_account"
+      ]
+    },
+    {
+      "id": "bx-02313",
+      "text": "can you tell me about a delivery address update?",
+      "intent": [
+        "set_up_shipping_address",
+        "change_shipping_address"
+      ]
+    },
+    {
+      "id": "bx-25494",
+      "text": "i cfannot see order #726261 current status",
+      "sentiment": [
+        "negative",
+        "neutral"
+      ]
+    },
+    {
+      "id": "bx-06717",
+      "text": "I want assistance checking how long refunds usually take",
+      "intent": [
+        "track_refund",
+        "check_refund_policy"
+      ],
+      "urgency": [
+        "medium",
+        "low"
+      ]
+    },
+    {
+      "id": "bx-20584",
+      "text": "I am looking for information about the access key retrieval",
+      "urgency": [
+        "low",
+        "medium"
+      ]
+    },
+    {
+      "id": "bx-23148",
+      "text": "i dont know what i have to do to submit my delivery address",
+      "urgency": [
+        "low",
+        "medium"
+      ]
+    },
+    {
+      "id": "bx-23478",
+      "text": "where do I submit the new shipping address?",
+      "urgency": [
+        "low",
+        "medium"
+      ]
+    }
+  ]
+}

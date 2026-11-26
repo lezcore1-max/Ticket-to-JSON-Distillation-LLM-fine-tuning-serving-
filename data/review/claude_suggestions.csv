@@ -1,0 +1,21 @@
+﻿row,id,text,field,teacher,suggested,confidence,reason
+1,bx-00140,"I have got to cancel purchase #259275, how do I do it?",urgency,high,medium,clear,"cancel = medium; no urgent words, anger, or blocked/losing money"
+6,bx-00000,question about cancelling order AY454462,intent,check_cancellation_fee,cancel_order,clear,"asks about cancelling, not about a fee"
+7,bx-03739,I don't know how I can check the fucking withdrawal charges,urgency,high,medium,clear,"fee question = low, profanity raises ONE level -> medium"
+8,bx-15251,I don't know how to get the bill #00108,intent,check_invoice,get_invoice,clear,wants to GET the bill (sent/downloaded) = get_invoice
+9,bx-15708,what do I have to do to get the invoice from Carlos Gomez?,intent,check_invoice,get_invoice,clear,'get the invoice' = get_invoice
+10,bx-08712,I need help speaking with customer support,intent,contact_human_agent,contact_customer_service,clear,'speak with customer support' = reach support; rows 91-92 with same wording are contact_customer_service
+12,bx-26094,I expect an restitution of $439,intent,get_refund,track_refund,ambiguous,'I expect a restitution' reads as awaiting a refund already in progress (Bitext: track_refund)
+13,bx-26247,i expect a compensqtion of 486 dollars,intent,get_refund,track_refund,ambiguous,same pattern as row 12
+22,bx-19353,how can I purchase several fucking items ?,urgency,low,medium,clear,"place_order = low, profanity raises one level -> medium"
+23,bx-19458,how can I order several goddamn articles?,urgency,low,medium,clear,same as row 22
+24,bx-20377,I cannot reset my profile PIN,product,profile,null,clear,'profile' alone is generic -> null (only tier + profile counts)
+24,bx-20377,I cannot reset my profile PIN,sentiment,negative,neutral,clear,'I cannot reset' states a problem; no frustration words
+25,bx-10451,have problems with creating a freemium account,intent,registration_problems,create_account,ambiguous,'have problems with creating X' is a Bitext template like row 33 'have a problem with canceling order' -> cancel_order; keep urgency medium (problem reported)
+26,bx-02313,can you tell me about a delivery address update?,intent,set_up_shipping_address,change_shipping_address,clear,'delivery address update' = change; row 45 with same wording is change_shipping_address
+31,bx-25494,i cfannot see order #726261 current status,sentiment,negative,neutral,clear,'cannot see status' states a problem; no frustration words (row 40 'can't change' is neutral)
+32,bx-06717,I want assistance checking how long refunds usually take,intent,track_refund,check_refund_policy,clear,"general question about refund times, not a specific refund"
+32,bx-06717,I want assistance checking how long refunds usually take,urgency,medium,low,clear,policy question = low
+164,bx-20584,I am looking for information about the access key retrieval,urgency,low,medium,clear,recover_password = medium; 'information about deletion' rows 110/112 are medium too
+181,bx-23148,i dont know what i have to do to submit my delivery address,urgency,low,medium,clear,"address action = medium (rows 180, 182, 184, 185 are medium)"
+183,bx-23478,where do I submit the new shipping address?,urgency,low,medium,clear,same as row 181

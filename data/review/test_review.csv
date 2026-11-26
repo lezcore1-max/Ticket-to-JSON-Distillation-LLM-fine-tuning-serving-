@@ -1,0 +1,201 @@
+﻿row,id,check_first,flags,text,bitext_intent,known_order_id,known_product,teacher_intent,teacher_urgency,teacher_product,teacher_order_id,teacher_sentiment,final_intent,final_urgency,final_product,final_order_id,final_sentiment,reviewed,notes
+1,bx-00140,YES,high urgency (rare class),"I have got to cancel purchase #259275, how do I do it?",cancel_order,259275,,cancel_order,high,,259275,neutral,cancel_order,medium,,259275,neutral,y,"claude: urgency: cancel = medium; no urgent words, anger, or blocked/losing money"
+2,bx-00175,YES,high urgency (rare class); negative sentiment (rare class),"I can't afford order 55246098, could I cancel it?",cancel_order,55246098,,cancel_order,high,,55246098,negative,cancel_order,high,,55246098,negative,y,claude: ok
+3,bx-00645,YES,high urgency (rare class); negative sentiment (rare class),"I can't afford this item, I try to cancel order 973066",cancel_order,973066,,cancel_order,high,,973066,negative,cancel_order,high,,973066,negative,y,claude: ok
+4,bx-01667,YES,high urgency (rare class); negative sentiment (rare class),i cant add some goddamn products to purchase 99325802,change_order,99325802,,change_order,high,,99325802,negative,change_order,high,,99325802,negative,y,claude: ok
+5,bx-02942,YES,high urgency (rare class); negative sentiment (rare class),I have issues trying to change the damn address,change_shipping_address,,,change_shipping_address,high,,,negative,change_shipping_address,high,,,negative,y,claude: ok
+6,bx-00000,YES,intent differs from Bitext (cancel_order),question about cancelling order AY454462,cancel_order,AY454462,,check_cancellation_fee,medium,,AY454462,neutral,cancel_order,medium,,AY454462,neutral,y,"claude: intent: asks about cancelling, not about a fee"
+7,bx-03739,YES,high urgency (rare class); negative sentiment (rare class),I don't know how I can check the fucking withdrawal charges,check_cancellation_fee,,,check_cancellation_fee,high,,,negative,check_cancellation_fee,medium,,,negative,y,"claude: urgency: fee question = low, profanity raises ONE level -> medium"
+8,bx-15251,YES,intent differs from Bitext (get_invoice),I don't know how to get the bill #00108,get_invoice,,,check_invoice,low,,,neutral,get_invoice,low,,,neutral,y,claude: intent: wants to GET the bill (sent/downloaded) = get_invoice
+9,bx-15708,YES,intent differs from Bitext (get_invoice),what do I have to do to get the invoice from Carlos Gomez?,get_invoice,,,check_invoice,low,,,neutral,get_invoice,low,,,neutral,y,claude: intent: 'get the invoice' = get_invoice
+10,bx-08712,YES,intent differs from Bitext (contact_customer_service),I need help speaking with customer support,contact_customer_service,,,contact_human_agent,low,,,neutral,contact_customer_service,low,,,neutral,y,claude: intent: 'speak with customer support' = reach support; rows 91-92 with same wording are contact_customer_service
+11,bx-14123,YES,product differs from known (None),updating freemium accojnt,edit_account,,,edit_account,medium,freemium account,,neutral,edit_account,medium,freemium account,,neutral,y,claude: ok
+12,bx-26094,YES,intent differs from Bitext (track_refund),I expect an restitution of $439,track_refund,,,get_refund,medium,,,neutral,track_refund,medium,,,neutral,y,claude: intent: 'I expect a restitution' reads as awaiting a refund already in progress (Bitext: track_refund) [ambiguous]
+13,bx-26247,YES,intent differs from Bitext (track_refund),i expect a compensqtion of 486 dollars,track_refund,,,get_refund,medium,,,neutral,track_refund,medium,,,neutral,y,claude: intent: same pattern as row 12 [ambiguous]
+14,bx-17149,YES,negative sentiment (rare class),i cant subscribe to the damn company newsletter,newsletter_subscription,,,newsletter_subscription,medium,,,negative,newsletter_subscription,medium,,,negative,y,claude: ok
+15,bx-18143,YES,high urgency (rare class),help notifying of issues with payments,payment_issue,,,payment_issue,high,,,neutral,payment_issue,high,,,neutral,y,claude: ok
+16,bx-18149,YES,high urgency (rare class),can uhelp me to solve a problem with online payments,payment_issue,,,payment_issue,high,,,neutral,payment_issue,high,,,neutral,y,claude: ok
+17,bx-18340,YES,high urgency (rare class),help me to notify of issues with payment,payment_issue,,,payment_issue,high,,,neutral,payment_issue,high,,,neutral,y,claude: ok
+18,bx-18357,YES,high urgency (rare class),i need assistance informing of problems with online payment,payment_issue,,,payment_issue,high,,,neutral,payment_issue,high,,,neutral,y,claude: ok
+19,bx-18461,YES,high urgency (rare class),help me to inform of an issue with online payment,payment_issue,,,payment_issue,high,,,neutral,payment_issue,high,,,neutral,y,claude: ok
+20,bx-18486,YES,high urgency (rare class),want assistance notifying of an error with payments,payment_issue,,,payment_issue,high,,,neutral,payment_issue,high,,,neutral,y,claude: ok
+21,bx-18715,YES,high urgency (rare class),I have to report payment issues,payment_issue,,,payment_issue,high,,,neutral,payment_issue,high,,,neutral,y,claude: ok
+22,bx-19353,YES,negative sentiment (rare class),how can I purchase several fucking items ?,place_order,,,place_order,low,,,negative,place_order,medium,,,negative,y,"claude: urgency: place_order = low, profanity raises one level -> medium"
+23,bx-19458,YES,negative sentiment (rare class),how can I order several goddamn articles?,place_order,,,place_order,low,,,negative,place_order,medium,,,negative,y,claude: urgency: same as row 22
+24,bx-20377,YES,product differs from known (None); negative sentiment (rare class),I cannot reset my profile PIN,recover_password,,,recover_password,medium,profile,,negative,recover_password,medium,,,neutral,y,claude: product: 'profile' alone is generic -> null (only tier + profile counts) | sentiment: 'I cannot reset' states a problem; no frustration words
+25,bx-10451,YES,intent differs from Bitext (create_account),have problems with creating a freemium account,create_account,,freemium account,registration_problems,medium,freemium account,,neutral,create_account,medium,freemium account,,neutral,y,claude: intent: 'have problems with creating X' is a Bitext template like row 33 'have a problem with canceling order' -> cancel_order; keep urgency medium (problem reported) [ambiguous]
+26,bx-02313,YES,intent differs from Bitext (change_shipping_address),can you tell me about a delivery address update?,change_shipping_address,,,set_up_shipping_address,medium,,,neutral,change_shipping_address,medium,,,neutral,y,claude: intent: 'delivery address update' = change; row 45 with same wording is change_shipping_address
+27,bx-23638,YES,high urgency (rare class); negative sentiment (rare class),how can I set my bloody delivery address up?,set_up_shipping_address,,,set_up_shipping_address,high,,,negative,set_up_shipping_address,high,,,negative,y,claude: ok
+28,bx-24630,YES,product differs from known (platinum),need help using the platinum proffile,switch_account,,platinum,switch_account,medium,platinum account,,neutral,switch_account,medium,platinum account,,neutral,y,claude: ok
+29,bx-24869,YES,high urgency (rare class); negative sentiment (rare class),how could I change to the goddamn student account?,switch_account,,student account,switch_account,high,student account,,negative,switch_account,high,student account,,negative,y,claude: ok
+30,bx-24883,YES,high urgency (rare class); negative sentiment (rare class),can uhelp me to check the fucking eta of the order #406557,track_order,406557,,track_order,high,,406557,negative,track_order,high,,406557,negative,y,claude: ok
+31,bx-25494,YES,negative sentiment (rare class),i cfannot see order #726261 current status,track_order,726261,,track_order,medium,,726261,negative,track_order,medium,,726261,neutral,y,claude: sentiment: 'cannot see status' states a problem; no frustration words (row 40 'can't change' is neutral)
+32,bx-06717,YES,intent differs from Bitext (check_refund_policy),I want assistance checking how long refunds usually take,check_refund_policy,,,track_refund,medium,,,neutral,check_refund_policy,low,,,neutral,y,"claude: intent: general question about refund times, not a specific refund | urgency: policy question = low"
+33,bx-00029,,,have a problem with canceling order 6311729,cancel_order,6311729,,cancel_order,medium,,6311729,neutral,cancel_order,medium,,6311729,neutral,y,claude: ok
+34,bx-00200,,,camceling order 39330228,cancel_order,39330228,,cancel_order,medium,,39330228,neutral,cancel_order,medium,,39330228,neutral,y,claude: ok
+35,bx-00211,,,ened help with cancelling purchase RA173173,cancel_order,RA173173,,cancel_order,medium,,RA173173,neutral,cancel_order,medium,,RA173173,neutral,y,claude: ok
+36,bx-00863,,,need assistance to cancel purchase 57605368,cancel_order,57605368,,cancel_order,medium,,57605368,neutral,cancel_order,medium,,57605368,neutral,y,claude: ok
+37,bx-01279,,,wanna edit purchgase #380071,change_order,380071,,change_order,medium,,380071,neutral,change_order,medium,,380071,neutral,y,claude: ok
+38,bx-01328,,,is it possible to swap some items of purchase #387765,change_order,387765,,change_order,medium,,387765,neutral,change_order,medium,,387765,neutral,y,claude: ok
+39,bx-01358,,,I need to switch several items of order JC936078,change_order,JC936078,,change_order,medium,,JC936078,neutral,change_order,medium,,JC936078,neutral,y,claude: ok
+40,bx-01608,,,I can't  change something of order LK711897,change_order,LK711897,,change_order,medium,,LK711897,neutral,change_order,medium,,LK711897,neutral,y,claude: ok
+41,bx-01787,,,order change,change_order,,,change_order,medium,,,neutral,change_order,medium,,,neutral,y,claude: ok
+42,bx-01844,,,I need to update purchase ZA880507,change_order,ZA880507,,change_order,medium,,ZA880507,neutral,change_order,medium,,ZA880507,neutral,y,claude: ok
+43,bx-01924,,,need asistance to modify purchase ORD-49306,change_order,ORD-49306,,change_order,medium,,ORD-49306,neutral,change_order,medium,,ORD-49306,neutral,y,claude: ok
+44,bx-02368,,,I want support modifying the address,change_shipping_address,,,change_shipping_address,medium,,,neutral,change_shipping_address,medium,,,neutral,y,claude: ok
+45,bx-02441,,,tell me about a delivery address update,change_shipping_address,,,change_shipping_address,medium,,,neutral,change_shipping_address,medium,,,neutral,y,claude: ok
+46,bx-02457,,,where do I update my delivery address ?,change_shipping_address,,,change_shipping_address,medium,,,neutral,change_shipping_address,medium,,,neutral,y,claude: ok
+47,bx-02484,,,I don't know what I have to do to modify my delivery address,change_shipping_address,,,change_shipping_address,medium,,,neutral,change_shipping_address,medium,,,neutral,y,claude: ok
+48,bx-02633,,,issue updating address,change_shipping_address,,,change_shipping_address,medium,,,neutral,change_shipping_address,medium,,,neutral,y,claude: ok
+49,bx-02638,,,i want help trying to change the address,change_shipping_address,,,change_shipping_address,medium,,,neutral,change_shipping_address,medium,,,neutral,y,claude: ok
+50,bx-03067,,,I am trying to see the cancellation fee,check_cancellation_fee,,,check_cancellation_fee,low,,,neutral,check_cancellation_fee,low,,,neutral,y,claude: ok
+51,bx-03261,,,where to see the cancellation fee,check_cancellation_fee,,,check_cancellation_fee,low,,,neutral,check_cancellation_fee,low,,,neutral,y,claude: ok
+52,bx-03265,,,i want assistance checking the termination penalty,check_cancellation_fee,,,check_cancellation_fee,low,,,neutral,check_cancellation_fee,low,,,neutral,y,claude: ok
+53,bx-03384,,,I want help to see the withdrawal penalty,check_cancellation_fee,,,check_cancellation_fee,low,,,neutral,check_cancellation_fee,low,,,neutral,y,claude: ok
+54,bx-03411,,,where to see the termination charges,check_cancellation_fee,,,check_cancellation_fee,low,,,neutral,check_cancellation_fee,low,,,neutral,y,claude: ok
+55,bx-03455,,,i want assistance seeing the early exit charges,check_cancellation_fee,,,check_cancellation_fee,low,,,neutral,check_cancellation_fee,low,,,neutral,y,claude: ok
+56,bx-03512,,,how could I check the early exit penalties?,check_cancellation_fee,,,check_cancellation_fee,low,,,neutral,check_cancellation_fee,low,,,neutral,y,claude: ok
+57,bx-04115,,,"I have to locate bill #12588, can you help me?",check_invoice,,,check_invoice,low,,,neutral,check_invoice,low,,,neutral,y,claude: ok
+58,bx-04135,,,could you help me check my invoices from Olga Petrova?,check_invoice,,,check_invoice,low,,,neutral,check_invoice,low,,,neutral,y,claude: ok
+59,bx-04136,,,wanna find the bill #37777 can uhelp me,check_invoice,,,check_invoice,low,,,neutral,check_invoice,low,,,neutral,y,claude: ok
+60,bx-04157,,,I want assistance locating my invoices from Sarah O'Brien,check_invoice,,,check_invoice,low,,,neutral,check_invoice,low,,,neutral,y,claude: ok
+61,bx-04224,,,I want assistance to give a quick look at the invoice #37777,check_invoice,,,check_invoice,low,,,neutral,check_invoice,low,,,neutral,y,claude: ok
+62,bx-04501,,,can you help me to take a quick look at my bill #85632?,check_invoice,,,check_invoice,low,,,neutral,check_invoice,low,,,neutral,y,claude: ok
+63,bx-04710,,,I want assistance checking my invoice #37777,check_invoice,,,check_invoice,low,,,neutral,check_invoice,low,,,neutral,y,claude: ok
+64,bx-04739,,,I have to look for the bills from Priya Sharma,check_invoice,,,check_invoice,low,,,neutral,check_invoice,low,,,neutral,y,claude: ok
+65,bx-05167,,,can you tell me what payment methods you accept?,check_payment_methods,,,check_payment_methods,low,,,neutral,check_payment_methods,low,,,neutral,y,claude: ok
+66,bx-05173,,,help me to check ur allowed payment options,check_payment_methods,,,check_payment_methods,low,,,neutral,check_payment_methods,low,,,neutral,y,claude: ok
+67,bx-05361,,,can you help me see the accepted payment methods?,check_payment_methods,,,check_payment_methods,low,,,neutral,check_payment_methods,low,,,neutral,y,claude: ok
+68,bx-05371,,,can I see what payment methods are available?,check_payment_methods,,,check_payment_methods,low,,,neutral,check_payment_methods,low,,,neutral,y,claude: ok
+69,bx-05378,,,whree to check what payment methods are available?,check_payment_methods,,,check_payment_methods,low,,,neutral,check_payment_methods,low,,,neutral,y,claude: ok
+70,bx-05482,,,"I have got to see the allowed payment methods, how to do it?",check_payment_methods,,,check_payment_methods,low,,,neutral,check_payment_methods,low,,,neutral,y,claude: ok
+71,bx-05507,,,I'm trying to check what payment options are available,check_payment_methods,,,check_payment_methods,low,,,neutral,check_payment_methods,low,,,neutral,y,claude: ok
+72,bx-05737,,,I need help checking your available payment methods,check_payment_methods,,,check_payment_methods,low,,,neutral,check_payment_methods,low,,,neutral,y,claude: ok
+73,bx-05987,,,"I have to see your refund policy, will you help me?",check_refund_policy,,,check_refund_policy,low,,,neutral,check_refund_policy,low,,,neutral,y,claude: ok
+74,bx-06168,,,I try to see in which cases can I request to be refunded,check_refund_policy,,,check_refund_policy,low,,,neutral,check_refund_policy,low,,,neutral,y,claude: ok
+75,bx-06301,,,can you show me in what cases can I ask to be refunded?,check_refund_policy,,,check_refund_policy,low,,,neutral,check_refund_policy,low,,,neutral,y,claude: ok
+76,bx-06390,,,need to check ur refund policy can i get some help,check_refund_policy,,,check_refund_policy,low,,,neutral,check_refund_policy,low,,,neutral,y,claude: ok
+77,bx-06479,,,help to check in what cases can I request to be refunded,check_refund_policy,,,check_refund_policy,low,,,neutral,check_refund_policy,low,,,neutral,y,claude: ok
+78,bx-06602,,,I have to see in which cases can I request reimbursements,check_refund_policy,,,check_refund_policy,low,,,neutral,check_refund_policy,low,,,neutral,y,claude: ok
+79,bx-06652,,,I watn help to check in what cases can I ask for a refund,check_refund_policy,,,check_refund_policy,low,,,neutral,check_refund_policy,low,,,neutral,y,claude: ok
+80,bx-07120,,,can you help me to make a consumner complaint?,complaint,,,complaint,medium,,,neutral,complaint,medium,,,neutral,y,claude: ok
+81,bx-07286,,,"I have got to lodge a complaint, can I get some help?",complaint,,,complaint,medium,,,neutral,complaint,medium,,,neutral,y,claude: ok
+82,bx-07331,,,help to make a consumer claim against your company,complaint,,,complaint,medium,,,neutral,complaint,medium,,,neutral,y,claude: ok
+83,bx-07619,,,i do not know how to lodge a complaint against ur business,complaint,,,complaint,medium,,,neutral,complaint,medium,,,neutral,y,claude: ok
+84,bx-07694,,,I need to lodge a customer claim against your business,complaint,,,complaint,medium,,,neutral,complaint,medium,,,neutral,y,claude: ok
+85,bx-07706,,,how could I lodge a reclamation?,complaint,,,complaint,medium,,,neutral,complaint,medium,,,neutral,y,claude: ok
+86,bx-07786,,,lodging consumer reclamation against urcompany,complaint,,,complaint,medium,,,neutral,complaint,medium,,,neutral,y,claude: ok
+87,bx-07905,,,I don't know what I need to do to make a claim,complaint,,,complaint,medium,,,neutral,complaint,medium,,,neutral,y,claude: ok
+88,bx-08193,,,help me check what hours i can reach customer support,contact_customer_service,,,contact_customer_service,low,,,neutral,contact_customer_service,low,,,neutral,y,claude: ok
+89,bx-08200,,,how to check at what time I can  contact customer service?,contact_customer_service,,,contact_customer_service,low,,,neutral,contact_customer_service,low,,,neutral,y,claude: ok
+90,bx-08481,,,contactcustomer service,contact_customer_service,,,contact_customer_service,low,,,neutral,contact_customer_service,low,,,neutral,y,claude: ok
+91,bx-08504,,,is it possible to talk to customer support?,contact_customer_service,,,contact_customer_service,low,,,neutral,contact_customer_service,low,,,neutral,y,claude: ok
+92,bx-08523,,,can I talk to customer service?,contact_customer_service,,,contact_customer_service,low,,,neutral,contact_customer_service,low,,,neutral,y,claude: ok
+93,bx-08725,,,can ya show me at what time customer assistance available is,contact_customer_service,,,contact_customer_service,low,,,neutral,contact_customer_service,low,,,neutral,y,claude: ok
+94,bx-08887,,,how to check at what time I can call customer service?,contact_customer_service,,,contact_customer_service,low,,,neutral,contact_customer_service,low,,,neutral,y,claude: ok
+95,bx-09013,,,I need to speak with a person,contact_human_agent,,,contact_human_agent,low,,,neutral,contact_human_agent,low,,,neutral,y,claude: ok
+96,bx-09134,,,i cannot chat with an assistant,contact_human_agent,,,contact_human_agent,low,,,neutral,contact_human_agent,low,,,neutral,y,claude: ok
+97,bx-09169,,,transferring to agent,contact_human_agent,,,contact_human_agent,low,,,neutral,contact_human_agent,low,,,neutral,y,claude: ok
+98,bx-09236,,,want help talking to someone,contact_human_agent,,,contact_human_agent,low,,,neutral,contact_human_agent,low,,,neutral,y,claude: ok
+99,bx-09362,,,can uhelp me speak with an operator,contact_human_agent,,,contact_human_agent,low,,,neutral,contact_human_agent,low,,,neutral,y,claude: ok
+100,bx-09404,,,wanna contact an assistant,contact_human_agent,,,contact_human_agent,low,,,neutral,contact_human_agent,low,,,neutral,y,claude: ok
+101,bx-09635,,,help me to speak with a live agent,contact_human_agent,,,contact_human_agent,low,,,neutral,contact_human_agent,low,,,neutral,y,claude: ok
+102,bx-09748,,,need help to speak with an assistant,contact_human_agent,,,contact_human_agent,low,,,neutral,contact_human_agent,low,,,neutral,y,claude: ok
+103,bx-10086,,,create platinum account,create_account,,platinum account,create_account,low,platinum account,,neutral,create_account,low,platinum account,,neutral,y,claude: ok
+104,bx-10217,,,open a platinum account,create_account,,platinum account,create_account,low,platinum account,,neutral,create_account,low,platinum account,,neutral,y,claude: ok
+105,bx-10287,,,need assistance with creating a freemium account,create_account,,freemium account,create_account,low,freemium account,,neutral,create_account,low,freemium account,,neutral,y,claude: ok
+106,bx-10439,,,i have a question about creating a freemium account,create_account,,freemium account,create_account,low,freemium account,,neutral,create_account,low,freemium account,,neutral,y,claude: ok
+107,bx-10537,,,could you help me to open a platinum account for my dad?,create_account,,platinum account,create_account,low,platinum account,,neutral,create_account,low,platinum account,,neutral,y,claude: ok
+108,bx-10604,,,where to create a standard account for my dad,create_account,,standard account,create_account,low,standard account,,neutral,create_account,low,standard account,,neutral,y,claude: ok
+109,bx-10683,,,I need an Platinum account,create_account,,platinum account,create_account,low,platinum account,,neutral,create_account,low,platinum account,,neutral,y,claude: ok
+110,bx-10931,,,where can i find information about a gold account deletion,delete_account,,gold account,delete_account,medium,gold account,,neutral,delete_account,medium,gold account,,neutral,y,claude: ok
+111,bx-10957,,,I don't know what I have to do to delete my Student account,delete_account,,student account,delete_account,medium,student account,,neutral,delete_account,medium,student account,,neutral,y,claude: ok
+112,bx-10976,,,how can i get information about my gold account removal,delete_account,,gold account,delete_account,medium,gold account,,neutral,delete_account,medium,gold account,,neutral,y,claude: ok
+113,bx-11142,,,wanna remove a pro account can ya helpme,delete_account,,pro account,delete_account,medium,pro account,,neutral,delete_account,medium,pro account,,neutral,y,claude: ok
+114,bx-11209,,,i need information about the termination of a Premium account,delete_account,,premium account,delete_account,medium,premium account,,neutral,delete_account,medium,premium account,,neutral,y,claude: ok
+115,bx-11263,,,where can I get information about a gold account removal?,delete_account,,gold account,delete_account,medium,gold account,,neutral,delete_account,medium,gold account,,neutral,y,claude: ok
+116,bx-11390,,,I don't know what I have to do to close a platinum account,delete_account,,platinum account,delete_account,medium,platinum account,,neutral,delete_account,medium,platinum account,,neutral,y,claude: ok
+117,bx-12114,,,need help checking what shipping options are available,delivery_options,,,delivery_options,low,,,neutral,delivery_options,low,,,neutral,y,claude: ok
+118,bx-12314,,,how can I see what options for delivery I can choose?,delivery_options,,,delivery_options,low,,,neutral,delivery_options,low,,,neutral,y,claude: ok
+119,bx-12351,,,i do not know what to do to check the shipping options,delivery_options,,,delivery_options,low,,,neutral,delivery_options,low,,,neutral,y,claude: ok
+120,bx-12435,,,i want help to check the shipping methods,delivery_options,,,delivery_options,low,,,neutral,delivery_options,low,,,neutral,y,claude: ok
+121,bx-12462,,,can you show me what methods for delivery I have?,delivery_options,,,delivery_options,low,,,neutral,delivery_options,low,,,neutral,y,claude: ok
+122,bx-12748,,,show the available methods for shipment,delivery_options,,,delivery_options,low,,,neutral,delivery_options,low,,,neutral,y,claude: ok
+123,bx-12876,,,i have got to see the delivery methods how do i do it,delivery_options,,,delivery_options,low,,,neutral,delivery_options,low,,,neutral,y,claude: ok
+124,bx-13148,,,need help seeing how soon can i expect the shipment,delivery_period,,,delivery_period,medium,,,neutral,delivery_period,medium,,,neutral,y,claude: ok
+125,bx-13168,,,i try to see how soon can i expect my shipment,delivery_period,,,delivery_period,medium,,,neutral,delivery_period,medium,,,neutral,y,claude: ok
+126,bx-13389,,,I want to see how long it takes for my item to arrive,delivery_period,,,delivery_period,medium,,,neutral,delivery_period,medium,,,neutral,y,claude: ok
+127,bx-13497,,,i dont know how i can see how soon can i expect my order,delivery_period,,,delivery_period,medium,,,neutral,delivery_period,medium,,,neutral,y,claude: ok
+128,bx-13510,,,I am trying to see when will my purchase arrive,delivery_period,,,delivery_period,medium,,,neutral,delivery_period,medium,,,neutral,y,claude: ok
+129,bx-13558,,,how could I check how long it takes for the item to arrive?,delivery_period,,,delivery_period,medium,,,neutral,delivery_period,medium,,,neutral,y,claude: ok
+130,bx-13657,,,I need to see how long it takes for the purchase to arrive,delivery_period,,,delivery_period,medium,,,neutral,delivery_period,medium,,,neutral,y,claude: ok
+131,bx-14063,,,want help to edit some of the details on my account,edit_account,,,edit_account,medium,,,neutral,edit_account,medium,,,neutral,y,claude: ok
+132,bx-14158,,,edit information on pro account,edit_account,,pro account,edit_account,medium,pro account,,neutral,edit_account,medium,pro account,,neutral,y,claude: ok
+133,bx-14194,,,modifu details on freemium account,edit_account,,freemium account,edit_account,medium,freemium account,,neutral,edit_account,medium,freemium account,,neutral,y,claude: ok
+134,bx-14385,,,i do not know what to do to modify the user info,edit_account,,,edit_account,medium,,,neutral,edit_account,medium,,,neutral,y,claude: ok
+135,bx-14510,,,edit freemium account,edit_account,,freemium account,edit_account,medium,freemium account,,neutral,edit_account,medium,freemium account,,neutral,y,claude: ok
+136,bx-14865,,,correct details on standard account,edit_account,,standard account,edit_account,medium,standard account,,neutral,edit_account,medium,standard account,,neutral,y,claude: ok
+137,bx-14963,,,i need assistance to download the bills from Emma Schmidt,get_invoice,,,get_invoice,low,,,neutral,get_invoice,low,,,neutral,y,claude: ok
+138,bx-15165,,,I want assistance downloading the invoice from Kwame Mensah,get_invoice,,,get_invoice,low,,,neutral,get_invoice,low,,,neutral,y,claude: ok
+139,bx-15304,,,I want to get invoice #00108,get_invoice,,,get_invoice,low,,,neutral,get_invoice,low,,,neutral,y,claude: ok
+140,bx-15473,,,"I have lost invoice #37777, could you mail it to me?",get_invoice,,,get_invoice,low,,,neutral,get_invoice,low,,,neutral,y,claude: ok
+141,bx-15605,,,can uhelp me getting the bill from four last years,get_invoice,,,get_invoice,low,,,neutral,get_invoice,low,,,neutral,y,claude: ok
+142,bx-15961,,,I do not know how I can obtain a rebate of money,get_refund,,,get_refund,medium,,,neutral,get_refund,medium,,,neutral,y,claude: ok
+143,bx-16243,,,I want help asking for rebates,get_refund,,,get_refund,medium,,,neutral,get_refund,medium,,,neutral,y,claude: ok
+144,bx-16353,,,want help demanding a rebate of my money,get_refund,,,get_refund,medium,,,neutral,get_refund,medium,,,neutral,y,claude: ok
+145,bx-16417,,,i dont know what to do to get a reimbursement,get_refund,,,get_refund,medium,,,neutral,get_refund,medium,,,neutral,y,claude: ok
+146,bx-16426,,,I do not know how to obtain rebates of money,get_refund,,,get_refund,medium,,,neutral,get_refund,medium,,,neutral,y,claude: ok
+147,bx-16641,,,would it be possible to obtain compensations of money?,get_refund,,,get_refund,medium,,,neutral,get_refund,medium,,,neutral,y,claude: ok
+148,bx-16886,,,can you help me obtain a compensation of my money?,get_refund,,,get_refund,medium,,,neutral,get_refund,medium,,,neutral,y,claude: ok
+149,bx-17143,,,i need help to unsubscribe to the corporate newsletter,newsletter_subscription,,,newsletter_subscription,low,,,neutral,newsletter_subscription,low,,,neutral,y,claude: ok
+150,bx-17337,,,"I have to subscribe to the newsletter, how do I do it?",newsletter_subscription,,,newsletter_subscription,low,,,neutral,newsletter_subscription,low,,,neutral,y,claude: ok
+151,bx-17354,,,how can i receive the newsletter,newsletter_subscription,,,newsletter_subscription,low,,,neutral,newsletter_subscription,low,,,neutral,y,claude: ok
+152,bx-17459,,,I do not know how to receive the corporate newsletter,newsletter_subscription,,,newsletter_subscription,low,,,neutral,newsletter_subscription,low,,,neutral,y,claude: ok
+153,bx-17484,,,i need help to unsubscribe to ur company newsletter,newsletter_subscription,,,newsletter_subscription,low,,,neutral,newsletter_subscription,low,,,neutral,y,claude: ok
+154,bx-17503,,,is it possible to unsubscribe from the company newsletter,newsletter_subscription,,,newsletter_subscription,low,,,neutral,newsletter_subscription,low,,,neutral,y,claude: ok
+155,bx-19141,,,what do I need to do to buy an item?,place_order,,,place_order,low,,,neutral,place_order,low,,,neutral,y,claude: ok
+156,bx-19147,,,i want help ordering some articles,place_order,,,place_order,low,,,neutral,place_order,low,,,neutral,y,claude: ok
+157,bx-19336,,,"I want to order a few of your item, can I get some help?",place_order,,,place_order,low,,,neutral,place_order,low,,,neutral,y,claude: ok
+158,bx-19483,,,"I want to purchase several of your article, how do I do it?",place_order,,,place_order,low,,,neutral,place_order,low,,,neutral,y,claude: ok
+159,bx-19501,,,what do I need to do to acquire an item?,place_order,,,place_order,low,,,neutral,place_order,low,,,neutral,y,claude: ok
+160,bx-19999,,,I am trying to retrieve the access key of my profile,recover_password,,,recover_password,medium,,,neutral,recover_password,medium,,,neutral,y,claude: ok
+161,bx-20226,,,I don't know what to do to reset my access key,recover_password,,,recover_password,medium,,,neutral,recover_password,medium,,,neutral,y,claude: ok
+162,bx-20351,,,i dont know how to recover the key of my user,recover_password,,,recover_password,medium,,,neutral,recover_password,medium,,,neutral,y,claude: ok
+163,bx-20498,,,how do I restore the password of my account?,recover_password,,,recover_password,medium,,,neutral,recover_password,medium,,,neutral,y,claude: ok
+164,bx-20584,,,I am looking for information about the access key retrieval,recover_password,,,recover_password,low,,,neutral,recover_password,medium,,,neutral,y,claude: urgency: recover_password = medium; 'information about deletion' rows 110/112 are medium too
+165,bx-20733,,,help me to restore my password,recover_password,,,recover_password,medium,,,neutral,recover_password,medium,,,neutral,y,claude: ok
+166,bx-21135,,,I am trying to inform of an issue with registrations,registration_problems,,,registration_problems,medium,,,neutral,registration_problems,medium,,,neutral,y,claude: ok
+167,bx-21141,,,I don't know how I can inform of errors with sign-up,registration_problems,,,registration_problems,medium,,,neutral,registration_problems,medium,,,neutral,y,claude: ok
+168,bx-21331,,,i want assistance notifying of an registration issue,registration_problems,,,registration_problems,medium,,,neutral,registration_problems,medium,,,neutral,y,claude: ok
+169,bx-21348,,,can i inform of a signup problem,registration_problems,,,registration_problems,medium,,,neutral,registration_problems,medium,,,neutral,y,claude: ok
+170,bx-21451,,,I want help to notify of problems with a sign-up,registration_problems,,,registration_problems,medium,,,neutral,registration_problems,medium,,,neutral,y,claude: ok
+171,bx-21476,,,i need help to notify of sign-up problems,registration_problems,,,registration_problems,medium,,,neutral,registration_problems,medium,,,neutral,y,claude: ok
+172,bx-21494,,,I want support with my sign-up,registration_problems,,,registration_problems,medium,,,neutral,registration_problems,medium,,,neutral,y,claude: ok
+173,bx-22134,,,help leaving feedback for your products,review,,,review,low,,,neutral,review,low,,,neutral,y,claude: ok
+174,bx-22140,,,need assistance to leave my feedback about a service,review,,,review,low,,,neutral,review,low,,,neutral,y,claude: ok
+175,bx-22328,,,I don't know what I have to do to subit some feedback,review,,,review,low,,,neutral,review,low,,,neutral,y,claude: ok
+176,bx-22345,,,want assistance to leave feedback for ur products,review,,,review,low,,,neutral,review,low,,,neutral,y,claude: ok
+177,bx-22449,,,I do not know how to leave a review about a product,review,,,review,low,,,neutral,review,low,,,neutral,y,claude: ok
+178,bx-22474,,,can you help me writing a review for your company?,review,,,review,low,,,neutral,review,low,,,neutral,y,claude: ok
+179,bx-22704,,,i have got to leave a review for a product i nee help,review,,,review,low,,,neutral,review,low,,,neutral,y,claude: ok
+180,bx-23130,,,I am trying to set up the new shipping address,set_up_shipping_address,,,set_up_shipping_address,medium,,,neutral,set_up_shipping_address,medium,,,neutral,y,claude: ok
+181,bx-23148,,,i dont know what i have to do to submit my delivery address,set_up_shipping_address,,,set_up_shipping_address,low,,,neutral,set_up_shipping_address,medium,,,neutral,y,"claude: urgency: address action = medium (rows 180, 182, 184, 185 are medium)"
+182,bx-23370,,,"I have to set a shipping address up, I need assistance",set_up_shipping_address,,,set_up_shipping_address,medium,,,neutral,set_up_shipping_address,medium,,,neutral,y,claude: ok
+183,bx-23478,,,where do I submit the new shipping address?,set_up_shipping_address,,,set_up_shipping_address,low,,,neutral,set_up_shipping_address,medium,,,neutral,y,claude: urgency: same as row 181
+184,bx-23491,,,I want assistance to submit a delivery address,set_up_shipping_address,,,set_up_shipping_address,medium,,,neutral,set_up_shipping_address,medium,,,neutral,y,claude: ok
+185,bx-23538,,,i need help setting up my new delivery address,set_up_shipping_address,,,set_up_shipping_address,medium,,,neutral,set_up_shipping_address,medium,,,neutral,y,claude: ok
+186,bx-24018,,,I want help to use the platinum profile,switch_account,,platinum account,switch_account,medium,platinum account,,neutral,switch_account,medium,platinum account,,neutral,y,claude: ok
+187,bx-24026,,,how could I use the gold profile?,switch_account,,gold account,switch_account,medium,gold account,,neutral,switch_account,medium,gold account,,neutral,y,claude: ok
+188,bx-24254,,,I don't know what I have to do to change to the pro account,switch_account,,pro account,switch_account,medium,pro account,,neutral,switch_account,medium,pro account,,neutral,y,claude: ok
+189,bx-24422,,,how do I use the pro account?,switch_account,,pro account,switch_account,medium,pro account,,neutral,switch_account,medium,pro account,,neutral,y,claude: ok
+190,bx-24585,,,how do i use the pro profile,switch_account,,pro account,switch_account,medium,pro account,,neutral,switch_account,medium,pro account,,neutral,y,claude: ok
+191,bx-25055,,,wanna chedk order #614089 status help me,track_order,614089,,track_order,medium,,614089,neutral,track_order,medium,,614089,neutral,y,claude: ok
+192,bx-25168,,,can I check purchase 26694987 status?,track_order,26694987,,track_order,medium,,26694987,neutral,track_order,medium,,26694987,neutral,y,claude: ok
+193,bx-25255,,,want asistance checking the eta of the order ORD-26989,track_order,ORD-26989,,track_order,medium,,ORD-26989,neutral,track_order,medium,,ORD-26989,neutral,y,claude: ok
+194,bx-25544,,,I don't know how to track purchase RB464190,track_order,RB464190,,track_order,medium,,RB464190,neutral,track_order,medium,,RB464190,neutral,y,claude: ok
+195,bx-25729,,,could ya help me locae purchase ORD-75231,track_order,ORD-75231,,track_order,medium,,ORD-75231,neutral,track_order,medium,,ORD-75231,neutral,y,claude: ok
+196,bx-25933,,,checking status of rebate,track_refund,,,track_refund,medium,,,neutral,track_refund,medium,,,neutral,y,claude: ok
+197,bx-26004,,,how do I see if there are any updates on my compensation?,track_refund,,,track_refund,medium,,,neutral,track_refund,medium,,,neutral,y,claude: ok
+198,bx-26437,,,need help checking if there are any updates on the refund,track_refund,,,track_refund,medium,,,neutral,track_refund,medium,,,neutral,y,claude: ok
+199,bx-26663,,,I have to know if there is anything wrong with the rebate,track_refund,,,track_refund,medium,,,neutral,track_refund,medium,,,neutral,y,claude: ok
+200,bx-26780,,,help me checking the reimbursement status,track_refund,,,track_refund,medium,,,neutral,track_refund,medium,,,neutral,y,claude: ok

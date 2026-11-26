@@ -12,7 +12,10 @@ intent (shown in brackets) — always output that exact category.
 Tie-breakers:
 - Asking about a fee for cancelling -> check_cancellation_fee (not cancel_order).
 - Asking how to reach support -> contact_customer_service; insisting on a real person -> contact_human_agent.
-- "Where is my order" / order status -> track_order; "when will it arrive / how long / it's late" -> delivery_period.
+- An order NUMBER is given and they ask about its status, location, ETA or arrival -> track_order.
+  No order number, asking when their item/parcel/order will arrive or how long delivery takes -> delivery_period.
+- Changing to, switching to, or wanting to use a different account tier/profile ("use the gold profile",
+  "change to the pro account") -> switch_account. Changing data/info/details ON an account -> edit_account.
 - Asking about the refund policy -> check_refund_policy; asking for money back -> get_refund;
   asking about a refund already requested -> track_refund.
 - Expressing anger is not by itself a complaint: if there is a concrete request (cancel, refund...),
@@ -44,8 +47,10 @@ Step 2: raise ONE level (never above high) if the customer
 ## product  (string or null)
 The specific item, plan or account tier the customer names, as a short lowercase noun phrase
 without articles or possessives. Account tiers count: "my Gold account" -> "gold account".
+"Profile" means account: "the gold profile" -> "gold account".
 Generic words are NOT products: "order", "item", "product", "article", "account", "user account",
 "purchase", "package", "parcel", "delivery", "stuff" -> null.
+Newsletters and subscriptions are NOT products: "corporate newsletter" -> null.
 Fix obvious typos in the product name ("platnum acount" -> "platinum account").
 Do not copy order numbers, invoice numbers, amounts, names or places into product.
 
@@ -86,6 +91,15 @@ Message: i would like to report an error with my payment
 
 Message: can i upgrade to the platnum acount
 {"intent": "switch_account", "category": "account", "urgency": "medium", "product": "platinum account", "order_id": null, "sentiment": "neutral"}
+
+Message: help me check the eta of purchase 77120345
+{"intent": "track_order", "category": "order", "urgency": "medium", "product": null, "order_id": "77120345", "sentiment": "neutral"}
+
+Message: how do i start using the Pro profile
+{"intent": "switch_account", "category": "account", "urgency": "medium", "product": "pro account", "order_id": null, "sentiment": "neutral"}
+
+Message: i want to stop getting the corporate newsletter
+{"intent": "newsletter_subscription", "category": "subscription", "urgency": "low", "product": null, "order_id": null, "sentiment": "neutral"}
 
 Message: your team sorted my issue so fast, thank you! where can i leave a review
 {"intent": "review", "category": "feedback", "urgency": "low", "product": null, "order_id": null, "sentiment": "positive"}

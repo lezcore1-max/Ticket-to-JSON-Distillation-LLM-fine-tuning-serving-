@@ -39,7 +39,8 @@ from labeling.splits import PREPARED, ROOT, load_jsonl
 from labeling.validate import SCHEMA, TAXONOMY, parse_and_validate, validate_label
 
 HERE = Path(__file__).resolve().parent
-PROMPT_VERSION = "v2"  # v2: two-step urgency rules, invoice-# / generic-product / typo examples
+PROMPT_VERSION = "v3"  # v3: order-number rule for track_order, use-profile = switch_account,
+#                        profile = account, newsletter is not a product (v2: urgency rules)
 
 BATCH_INSTRUCTIONS = """
 

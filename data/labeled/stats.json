@@ -8,237 +8,229 @@
       "gemini-3.5-flash-lite": 3000
     },
     "prompt_versions": {
-      "v2": 3000
+      "v3": 3000
     },
-    "needed_retry": 1,
+    "needed_retry": 0,
     "intent_agree": [
-      2833,
+      2909,
       3000
     ],
     "category_agree": [
-      2936,
+      2978,
       3000
     ],
     "order_id_correct": [
-      314,
-      314
+      321,
+      321
     ],
     "order_id_false_pos": [
-      7,
-      2686
+      0,
+      2679
     ],
     "product_correct": [
-      342,
-      360
+      361,
+      380
     ],
     "product_extra": [
-      65,
-      2640
+      25,
+      2620
     ],
     "urgency": {
-      "medium": 1516,
-      "low": 1306,
-      "high": 178
+      "medium": 1521,
+      "low": 1311,
+      "high": 168
     },
     "sentiment": {
-      "neutral": 2774,
-      "negative": 226
+      "neutral": 2794,
+      "negative": 206
     },
-    "urgency_consistency_overall": 0.956,
+    "urgency_consistency_overall": 0.9597,
     "urgency_consistency_by_intent": {
       "delivery_period": {
         "mode": "medium",
-        "share": 0.8889,
-        "n": 153
-      },
-      "newsletter_subscription": {
-        "mode": "low",
-        "share": 0.9099,
-        "n": 111
-      },
-      "switch_account": {
-        "mode": "medium",
-        "share": 0.9157,
-        "n": 83
+        "share": 0.7965,
+        "n": 113
       },
       "contact_human_agent": {
         "mode": "low",
-        "share": 0.9167,
+        "share": 0.875,
         "n": 120
-      },
-      "set_up_shipping_address": {
-        "mode": "medium",
-        "share": 0.9204,
-        "n": 113
       },
       "cancel_order": {
         "mode": "medium",
-        "share": 0.9231,
-        "n": 104
-      },
-      "registration_problems": {
-        "mode": "medium",
-        "share": 0.925,
-        "n": 120
-      },
-      "track_order": {
-        "mode": "medium",
-        "share": 0.9437,
-        "n": 71
-      },
-      "change_shipping_address": {
-        "mode": "medium",
-        "share": 0.9439,
+        "share": 0.9159,
         "n": 107
       },
       "change_order": {
         "mode": "medium",
-        "share": 0.945,
-        "n": 109
+        "share": 0.9273,
+        "n": 110
       },
-      "recover_password": {
+      "set_up_shipping_address": {
+        "mode": "medium",
+        "share": 0.9304,
+        "n": 115
+      },
+      "track_order": {
         "mode": "medium",
         "share": 0.9455,
         "n": 110
       },
-      "get_invoice": {
-        "mode": "low",
-        "share": 0.9524,
-        "n": 105
-      },
-      "create_account": {
-        "mode": "low",
-        "share": 0.9608,
-        "n": 102
-      },
-      "track_refund": {
+      "registration_problems": {
         "mode": "medium",
-        "share": 0.9652,
-        "n": 115
+        "share": 0.95,
+        "n": 120
       },
-      "check_cancellation_fee": {
+      "delete_account": {
+        "mode": "medium",
+        "share": 0.9537,
+        "n": 108
+      },
+      "newsletter_subscription": {
         "mode": "low",
-        "share": 0.9652,
-        "n": 115
+        "share": 0.955,
+        "n": 111
       },
-      "delivery_options": {
+      "change_shipping_address": {
+        "mode": "medium",
+        "share": 0.9623,
+        "n": 106
+      },
+      "switch_account": {
+        "mode": "medium",
+        "share": 0.9643,
+        "n": 112
+      },
+      "check_refund_policy": {
+        "mode": "low",
+        "share": 0.97,
+        "n": 100
+      },
+      "get_invoice": {
         "mode": "low",
         "share": 0.9717,
         "n": 106
       },
-      "delete_account": {
+      "recover_password": {
         "mode": "medium",
         "share": 0.9727,
         "n": 110
       },
-      "get_refund": {
-        "mode": "medium",
-        "share": 0.9744,
-        "n": 117
-      },
-      "edit_account": {
-        "mode": "medium",
-        "share": 0.9786,
-        "n": 140
-      },
-      "check_refund_policy": {
+      "review": {
         "mode": "low",
-        "share": 0.9802,
-        "n": 101
+        "share": 0.973,
+        "n": 111
+      },
+      "track_refund": {
+        "mode": "medium",
+        "share": 0.9735,
+        "n": 113
+      },
+      "check_cancellation_fee": {
+        "mode": "low",
+        "share": 0.9739,
+        "n": 115
       },
       "contact_customer_service": {
         "mode": "low",
-        "share": 0.981,
-        "n": 105
+        "share": 0.9808,
+        "n": 104
       },
-      "complaint": {
-        "mode": "medium",
-        "share": 0.9823,
-        "n": 113
-      },
-      "review": {
+      "check_invoice": {
         "mode": "low",
-        "share": 0.9909,
-        "n": 110
+        "share": 0.9831,
+        "n": 118
+      },
+      "get_refund": {
+        "mode": "medium",
+        "share": 0.9833,
+        "n": 120
+      },
+      "delivery_options": {
+        "mode": "low",
+        "share": 0.9907,
+        "n": 107
       },
       "check_payment_methods": {
         "mode": "low",
         "share": 0.9911,
         "n": 112
       },
-      "payment_issue": {
-        "mode": "high",
+      "place_order": {
+        "mode": "low",
+        "share": 0.9912,
+        "n": 114
+      },
+      "complaint": {
+        "mode": "medium",
         "share": 0.9912,
         "n": 113
       },
-      "place_order": {
-        "mode": "low",
-        "share": 0.9914,
-        "n": 116
+      "payment_issue": {
+        "mode": "high",
+        "share": 1.0,
+        "n": 112
       },
-      "check_invoice": {
+      "edit_account": {
+        "mode": "medium",
+        "share": 1.0,
+        "n": 112
+      },
+      "create_account": {
         "mode": "low",
-        "share": 0.9916,
-        "n": 119
+        "share": 1.0,
+        "n": 101
       }
     },
     "intent_agree_by_bitext_intent": {
-      "track_order": 0.6306,
-      "switch_account": 0.7387,
-      "check_refund_policy": 0.8829,
+      "check_refund_policy": 0.8919,
       "track_refund": 0.9009,
       "create_account": 0.9009,
-      "contact_customer_service": 0.9189,
-      "get_invoice": 0.9196,
-      "change_shipping_address": 0.9273,
-      "cancel_order": 0.9455,
-      "delivery_options": 0.9464,
-      "get_refund": 0.9464,
-      "set_up_shipping_address": 0.955,
+      "contact_customer_service": 0.9099,
+      "get_invoice": 0.9286,
+      "change_shipping_address": 0.9364,
+      "cancel_order": 0.9545,
+      "delivery_options": 0.9554,
+      "delete_account": 0.9643,
+      "set_up_shipping_address": 0.973,
+      "get_refund": 0.9732,
+      "track_order": 0.982,
       "check_invoice": 0.982,
-      "check_cancellation_fee": 0.982,
       "place_order": 0.982,
-      "delete_account": 0.9821,
-      "change_order": 0.9909,
-      "review": 0.991,
+      "contact_human_agent": 0.991,
       "recover_password": 0.991,
       "registration_problems": 0.991,
       "payment_issue": 0.991,
-      "contact_human_agent": 1.0,
+      "check_cancellation_fee": 0.991,
+      "delivery_period": 0.9911,
+      "review": 1.0,
       "check_payment_methods": 1.0,
-      "delivery_period": 1.0,
       "newsletter_subscription": 1.0,
+      "change_order": 1.0,
+      "switch_account": 1.0,
       "complaint": 1.0,
       "edit_account": 1.0
     },
     "top_confusions": [
       [
-        "track_order -> delivery_period",
-        41
-      ],
-      [
-        "switch_account -> edit_account",
-        27
-      ],
-      [
         "check_refund_policy -> track_refund",
-        13
+        12
       ],
       [
         "track_refund -> get_refund",
         11
       ],
       [
+        "contact_customer_service -> contact_human_agent",
+        10
+      ],
+      [
         "create_account -> registration_problems",
         10
       ],
       [
-        "contact_customer_service -> contact_human_agent",
-        9
-      ],
-      [
         "get_invoice -> check_invoice",
-        9
+        8
       ],
       [
         "change_shipping_address -> set_up_shipping_address",
@@ -246,60 +238,56 @@
       ],
       [
         "delivery_options -> place_order",
-        6
+        5
+      ],
+      [
+        "cancel_order -> check_cancellation_fee",
+        3
       ],
       [
         "set_up_shipping_address -> change_shipping_address",
-        5
+        3
+      ],
+      [
+        "check_invoice -> get_invoice",
+        2
       ]
     ],
     "product_extra_examples": [
       [
-        "corporate newsletter",
-        15
-      ],
-      [
         "premium account",
-        7
-      ],
-      [
-        "platinum account",
-        5
+        6
       ],
       [
         "pro account",
         5
       ],
       [
-        "standard profile",
+        "platinum account",
         4
-      ],
-      [
-        "premium profile",
-        3
-      ],
-      [
-        "freemium profile",
-        3
       ],
       [
         "standard account",
         3
       ],
       [
-        "gold profile",
+        "profile",
         3
       ],
       [
-        "newsletter",
-        3
+        "freemium account",
+        2
+      ],
+      [
+        "gold account",
+        2
       ]
     ],
     "reject_examples": [],
     "tokens": {
-      "prompt": 377096,
-      "output_incl_thinking": 221545,
-      "approx_requests": 151
+      "prompt": 415778,
+      "output_incl_thinking": 226090,
+      "approx_requests": 150
     }
   },
   "val": {
@@ -311,15 +299,15 @@
       "gemini-3.5-flash-lite": 300
     },
     "prompt_versions": {
-      "v2": 300
+      "v3": 300
     },
     "needed_retry": 0,
     "intent_agree": [
-      291,
+      295,
       300
     ],
     "category_agree": [
-      295,
+      298,
       300
     ],
     "order_id_correct": [
@@ -331,28 +319,28 @@
       267
     ],
     "product_correct": [
-      38,
-      39
+      39,
+      40
     ],
     "product_extra": [
-      5,
-      261
+      1,
+      260
     ],
     "urgency": {
-      "medium": 152,
-      "low": 130,
+      "medium": 154,
+      "low": 128,
       "high": 18
     },
     "sentiment": {
-      "neutral": 286,
-      "negative": 14
+      "neutral": 288,
+      "negative": 12
     },
-    "urgency_consistency_overall": 0.96,
+    "urgency_consistency_overall": 0.9567,
     "urgency_consistency_by_intent": {
       "delivery_period": {
         "mode": "medium",
-        "share": 0.7692,
-        "n": 13
+        "share": 0.7273,
+        "n": 11
       },
       "newsletter_subscription": {
         "mode": "low",
@@ -361,13 +349,18 @@
       },
       "create_account": {
         "mode": "low",
-        "share": 0.9091,
+        "share": 0.8182,
         "n": 11
       },
       "set_up_shipping_address": {
         "mode": "medium",
-        "share": 0.9091,
-        "n": 11
+        "share": 0.9,
+        "n": 10
+      },
+      "check_invoice": {
+        "mode": "low",
+        "share": 0.9,
+        "n": 10
       },
       "registration_problems": {
         "mode": "medium",
@@ -379,25 +372,20 @@
         "share": 0.9091,
         "n": 11
       },
-      "change_shipping_address": {
-        "mode": "medium",
-        "share": 0.9167,
-        "n": 12
-      },
-      "check_cancellation_fee": {
-        "mode": "low",
-        "share": 0.9167,
-        "n": 12
-      },
       "track_refund": {
         "mode": "medium",
         "share": 0.9167,
         "n": 12
       },
+      "change_shipping_address": {
+        "mode": "medium",
+        "share": 0.9231,
+        "n": 13
+      },
       "contact_human_agent": {
         "mode": "low",
         "share": 1.0,
-        "n": 12
+        "n": 11
       },
       "get_refund": {
         "mode": "medium",
@@ -412,12 +400,12 @@
       "delete_account": {
         "mode": "medium",
         "share": 1.0,
-        "n": 10
+        "n": 11
       },
       "track_order": {
         "mode": "medium",
         "share": 1.0,
-        "n": 9
+        "n": 11
       },
       "check_payment_methods": {
         "mode": "low",
@@ -437,7 +425,12 @@
       "contact_customer_service": {
         "mode": "low",
         "share": 1.0,
-        "n": 10
+        "n": 11
+      },
+      "check_cancellation_fee": {
+        "mode": "low",
+        "share": 1.0,
+        "n": 11
       },
       "cancel_order": {
         "mode": "medium",
@@ -457,24 +450,9 @@
       "switch_account": {
         "mode": "medium",
         "share": 1.0,
-        "n": 9
-      },
-      "review": {
-        "mode": "low",
-        "share": 1.0,
         "n": 11
       },
-      "edit_account": {
-        "mode": "medium",
-        "share": 1.0,
-        "n": 13
-      },
-      "delivery_options": {
-        "mode": "low",
-        "share": 1.0,
-        "n": 10
-      },
-      "check_invoice": {
+      "review": {
         "mode": "low",
         "share": 1.0,
         "n": 11
@@ -482,49 +460,55 @@
       "get_invoice": {
         "mode": "low",
         "share": 1.0,
+        "n": 12
+      },
+      "edit_account": {
+        "mode": "medium",
+        "share": 1.0,
         "n": 11
+      },
+      "delivery_options": {
+        "mode": "low",
+        "share": 1.0,
+        "n": 10
       }
     },
     "intent_agree_by_bitext_intent": {
-      "track_order": 0.8182,
-      "switch_account": 0.8182,
       "check_refund_policy": 0.9091,
-      "delete_account": 0.9091,
-      "contact_customer_service": 0.9091,
+      "set_up_shipping_address": 0.9091,
+      "check_invoice": 0.9091,
       "delivery_options": 0.9091,
       "cancel_order": 0.9167,
       "newsletter_subscription": 1.0,
       "contact_human_agent": 1.0,
       "get_refund": 1.0,
       "change_shipping_address": 1.0,
+      "delete_account": 1.0,
+      "track_order": 1.0,
       "create_account": 1.0,
       "check_payment_methods": 1.0,
       "place_order": 1.0,
       "recover_password": 1.0,
+      "contact_customer_service": 1.0,
       "check_cancellation_fee": 1.0,
       "payment_issue": 1.0,
       "delivery_period": 1.0,
       "track_refund": 1.0,
       "change_order": 1.0,
-      "set_up_shipping_address": 1.0,
+      "switch_account": 1.0,
       "review": 1.0,
       "registration_problems": 1.0,
-      "edit_account": 1.0,
+      "get_invoice": 1.0,
       "complaint": 1.0,
-      "check_invoice": 1.0,
-      "get_invoice": 1.0
+      "edit_account": 1.0
     },
     "top_confusions": [
       [
-        "track_order -> delivery_period",
-        2
-      ],
-      [
-        "switch_account -> edit_account",
-        2
-      ],
-      [
         "cancel_order -> payment_issue",
+        1
+      ],
+      [
+        "check_invoice -> get_invoice",
         1
       ],
       [
@@ -532,11 +516,7 @@
         1
       ],
       [
-        "delete_account -> check_cancellation_fee",
-        1
-      ],
-      [
-        "contact_customer_service -> contact_human_agent",
+        "set_up_shipping_address -> change_shipping_address",
         1
       ],
       [
@@ -546,22 +526,14 @@
     ],
     "product_extra_examples": [
       [
-        "corporate newsletter",
-        3
-      ],
-      [
         "gold account",
-        1
-      ],
-      [
-        "platinum profile",
         1
       ]
     ],
     "reject_examples": [],
     "tokens": {
-      "prompt": 37470,
-      "output_incl_thinking": 21504,
+      "prompt": 41528,
+      "output_incl_thinking": 22512,
       "approx_requests": 15
     }
   },
@@ -574,15 +546,15 @@
       "gemini-3.5-flash-lite": 200
     },
     "prompt_versions": {
-      "v2": 200
+      "v3": 200
     },
     "needed_retry": 0,
     "intent_agree": [
-      184,
+      191,
       200
     ],
     "category_agree": [
-      197,
+      199,
       200
     ],
     "order_id_correct": [
@@ -594,35 +566,60 @@
       178
     ],
     "product_correct": [
-      22,
-      23
+      25,
+      26
     ],
     "product_extra": [
-      5,
-      177
+      2,
+      174
     ],
     "urgency": {
-      "medium": 97,
-      "low": 93,
-      "high": 10
+      "medium": 94,
+      "low": 90,
+      "high": 16
     },
     "sentiment": {
-      "neutral": 185,
-      "negative": 15
+      "neutral": 187,
+      "negative": 13
     },
-    "urgency_consistency_overall": 0.965,
+    "urgency_consistency_overall": 0.93,
     "urgency_consistency_by_intent": {
+      "cancel_order": {
+        "mode": "medium",
+        "share": 0.5714,
+        "n": 7
+      },
       "set_up_shipping_address": {
         "mode": "medium",
-        "share": 0.75,
+        "share": 0.625,
         "n": 8
+      },
+      "check_cancellation_fee": {
+        "mode": "low",
+        "share": 0.7778,
+        "n": 9
+      },
+      "track_order": {
+        "mode": "medium",
+        "share": 0.8571,
+        "n": 7
       },
       "newsletter_subscription": {
         "mode": "low",
         "share": 0.8571,
         "n": 7
       },
-      "cancel_order": {
+      "recover_password": {
+        "mode": "medium",
+        "share": 0.8571,
+        "n": 7
+      },
+      "switch_account": {
+        "mode": "medium",
+        "share": 0.8571,
+        "n": 7
+      },
+      "change_shipping_address": {
         "mode": "medium",
         "share": 0.8571,
         "n": 7
@@ -632,35 +629,20 @@
         "share": 0.875,
         "n": 8
       },
-      "delivery_period": {
-        "mode": "medium",
-        "share": 0.8889,
-        "n": 9
-      },
-      "edit_account": {
-        "mode": "medium",
-        "share": 0.9167,
-        "n": 12
-      },
       "get_invoice": {
         "mode": "low",
         "share": 1.0,
-        "n": 6
+        "n": 5
       },
       "create_account": {
         "mode": "low",
         "share": 1.0,
         "n": 7
       },
-      "track_order": {
-        "mode": "medium",
-        "share": 1.0,
-        "n": 5
-      },
       "contact_customer_service": {
         "mode": "low",
         "share": 1.0,
-        "n": 9
+        "n": 7
       },
       "payment_issue": {
         "mode": "high",
@@ -670,12 +652,17 @@
       "contact_human_agent": {
         "mode": "low",
         "share": 1.0,
-        "n": 7
+        "n": 9
       },
-      "recover_password": {
+      "edit_account": {
         "mode": "medium",
         "share": 1.0,
         "n": 7
+      },
+      "check_invoice": {
+        "mode": "low",
+        "share": 1.0,
+        "n": 10
       },
       "place_order": {
         "mode": "low",
@@ -692,23 +679,8 @@
         "share": 1.0,
         "n": 7
       },
-      "switch_account": {
-        "mode": "medium",
-        "share": 1.0,
-        "n": 2
-      },
       "check_refund_policy": {
         "mode": "low",
-        "share": 1.0,
-        "n": 8
-      },
-      "check_cancellation_fee": {
-        "mode": "low",
-        "share": 1.0,
-        "n": 9
-      },
-      "change_shipping_address": {
-        "mode": "medium",
         "share": 1.0,
         "n": 7
       },
@@ -727,15 +699,15 @@
         "share": 1.0,
         "n": 9
       },
-      "check_invoice": {
-        "mode": "low",
+      "delivery_period": {
+        "mode": "medium",
         "share": 1.0,
-        "n": 9
+        "n": 7
       },
       "track_refund": {
         "mode": "medium",
         "share": 1.0,
-        "n": 5
+        "n": 6
       },
       "complaint": {
         "mode": "medium",
@@ -749,25 +721,25 @@
       }
     },
     "intent_agree_by_bitext_intent": {
-      "switch_account": 0.2857,
       "get_invoice": 0.7143,
-      "track_order": 0.7143,
       "track_refund": 0.7143,
       "create_account": 0.875,
-      "contact_human_agent": 0.875,
+      "contact_customer_service": 0.875,
       "cancel_order": 0.875,
-      "check_invoice": 0.875,
+      "check_refund_policy": 0.875,
       "change_shipping_address": 0.875,
-      "contact_customer_service": 1.0,
+      "track_order": 1.0,
       "newsletter_subscription": 1.0,
       "payment_issue": 1.0,
+      "contact_human_agent": 1.0,
       "edit_account": 1.0,
       "change_order": 1.0,
       "recover_password": 1.0,
+      "check_invoice": 1.0,
       "place_order": 1.0,
       "registration_problems": 1.0,
       "delivery_options": 1.0,
-      "check_refund_policy": 1.0,
+      "switch_account": 1.0,
       "check_cancellation_fee": 1.0,
       "review": 1.0,
       "check_payment_methods": 1.0,
@@ -779,14 +751,6 @@
     },
     "top_confusions": [
       [
-        "switch_account -> edit_account",
-        5
-      ],
-      [
-        "track_order -> delivery_period",
-        2
-      ],
-      [
         "get_invoice -> check_invoice",
         2
       ],
@@ -795,15 +759,15 @@
         2
       ],
       [
-        "check_invoice -> get_invoice",
-        1
-      ],
-      [
-        "contact_human_agent -> contact_customer_service",
-        1
-      ],
-      [
         "change_shipping_address -> set_up_shipping_address",
+        1
+      ],
+      [
+        "contact_customer_service -> contact_human_agent",
+        1
+      ],
+      [
+        "check_refund_policy -> track_refund",
         1
       ],
       [
@@ -817,19 +781,7 @@
     ],
     "product_extra_examples": [
       [
-        "corporate newsletter",
-        1
-      ],
-      [
-        "gold profile",
-        1
-      ],
-      [
-        "pro profile",
-        1
-      ],
-      [
-        "platinum profile",
+        "profile",
         1
       ],
       [
@@ -839,8 +791,8 @@
     ],
     "reject_examples": [],
     "tokens": {
-      "prompt": 25014,
-      "output_incl_thinking": 15370,
+      "prompt": 27726,
+      "output_incl_thinking": 15366,
       "approx_requests": 10
     }
   },

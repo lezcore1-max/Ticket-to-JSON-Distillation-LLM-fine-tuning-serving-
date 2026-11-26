@@ -5,19 +5,19 @@ customer-support messages into structured JSON, then serving it in production.
 
 ```text
 Input:  "my order #4521 hasn't arrived, it's been 10 days, very frustrated"
-Output: {"intent": "delivery_period", "category": "delivery", "urgency": "high",
+Output: {"intent": "track_order", "category": "order", "urgency": "high",
          "product": null, "order_id": "4521", "sentiment": "negative"}
 ```
 
 **Pipeline:** Bitext messages → teacher LLM labels (Gemini, schema-validated) → QLoRA fine-tune of
 Qwen2.5-1.5B-Instruct (Unsloth) → vLLM + FastAPI (Docker, load-tested) → GGUF + Gradio demo.
 
-> 🚧 Work in progress: a 7-day build. Day 1 (data + labeling pipeline) is done.
+> 🚧 Work in progress: a 7-day build. Days 1–2 (data, labeling, reviewed test set) are done.
 
 ## Progress
 
 - [x] **Day 1:** dataset prep, output schema, teacher prompt, batched labeling pipeline, pilot report
-- [ ] Day 2: label all messages, hand-check the 200-message test set
+- [x] **Day 2:** all 3,500 messages labeled by the teacher; 200-message test set reviewed and corrected
 - [ ] Day 3: evaluation script and baselines (teacher, prompted small model)
 - [ ] Day 4: QLoRA fine-tuning (2 runs) and DistilBERT baseline
 - [ ] Day 5: vLLM + FastAPI + Docker serving, Locust load test
@@ -73,6 +73,42 @@ are resent in smaller batches. Runs are resumable and cap their request count.
 [`labeling/pilot_report.py`](labeling/pilot_report.py) compares teacher labels against Bitext
 labels and injected values, and compares two teachers against each other.
 
+**Teacher:** `gemini-3.5-flash-lite` (free tier), prompt v3 ([`labeling/prompt.md`](labeling/prompt.md)).
+The prompt was revised twice after checking samples: v2 added two-step urgency rules; v3 aligned
+intent boundaries with Bitext (an order number means `track_order`; using a tier means `switch_account`).
+
+Full-run quality, from [`labeling/label_stats.py`](labeling/label_stats.py)
+([report](labeling/label_report.md)):
+
+| | train | val | test |
+|---|---|---|---|
+| valid labels | 3000/3000 | 300/300 | 200/200 |
+| intent = Bitext label | 97.0% | 98.3% | 95.5% |
+| order_id = injected id | 321/321 | 33/33 | 22/22 |
+| order_id false alarms | 0/2679 | 0/267 | 0/178 |
+| urgency low / medium / high | 1311 / 1521 / 168 | 128 / 154 / 18 | 90 / 94 / 16 |
+| sentiment negative / neutral / positive | 206 / 2794 / 0 | 12 / 288 / 0 | 13 / 187 / 0 |
+
+## Test set review
+
+The 200 test labels were reviewed row by row against the written labeling rules
+([`labeling/make_review_sheet.py`](labeling/make_review_sheet.py) →
+[`data/review/test_review.csv`](data/review/test_review.csv) →
+[`labeling/merge_review.py`](labeling/merge_review.py)).
+
+**Reviewer: Claude (an AI model), not a human.** Every test row is marked
+`label_source: "claude_checked"`. A human re-check can replace it later with
+`merge_review --reviewer human`.
+
+From [`data/final/review_stats.json`](data/final/review_stats.json): 18/200 rows corrected
+(teacher exact match 91.0%). Teacher field accuracy against the reviewed labels: intent 95.5%,
+urgency 96.0%, product 99.5%, order_id 100%, sentiment 99.0%. Most corrections were urgency
+borderline cases and near-miss intents (e.g. `get_invoice` vs `check_invoice`).
+
+**Known limitations of the data:** Bitext messages are synthetic requests, so there is **no
+positive sentiment** (in practice sentiment is negative vs neutral), and **high urgency is rare**
+(about 6–8%). Evaluation reports these classes separately.
+
 ## How to run
 
 ```bash
@@ -85,13 +121,19 @@ python -m labeling.prepare_data                                   # build splits
 python -m labeling.label --list-models                            # see available model ids
 python -m labeling.label --split train --n 50 --stratify --out data/labeled/pilot.jsonl
 python -m labeling.pilot_report --labels data/labeled/pilot.jsonl --out labeling/pilot_report.md
+
+python -m labeling.label --split train          # also: --split val, --split test
+python -m labeling.label_stats                  # quality report for the full run
+python -m labeling.make_review_sheet            # test-set review sheet (CSV)
+python -m labeling.merge_review --reviewer human  # after reviewing -> data/final/
 ```
 
 ## Repo layout
 
 ```text
-data/        prepared splits (train/val/test JSONL), test ids; labeled data from Day 2
-labeling/    schema, taxonomy, teacher prompt, data prep, labeler, pilot report
+data/        prepared/ splits, labeled/ teacher labels, review/ test sheet,
+             final/ training-ready data (train/val: teacher, test: reviewed)
+labeling/    schema, taxonomy, teacher prompt, data prep, labeler, reports, review + merge
 training/    QLoRA fine-tuning (Day 4)
 eval/        evaluation script (Day 3)
 serving/     FastAPI + vLLM + Docker + Locust (Day 5)

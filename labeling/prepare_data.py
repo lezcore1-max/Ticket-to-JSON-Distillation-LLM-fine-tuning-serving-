@@ -39,7 +39,9 @@ CURRENCIES = ["$", "€", "£", "₹"]
 # in the raw data: standard 389, pro 265, freemium 247, platinum 243, gold 231, premium 230),
 # plus our own placeholder tiers. Tolerates small typos in "account" (acount, accout).
 TIER_RE = re.compile(r"\b(" + "|".join(sorted(set(TIERS) | {"standard", "pro", "freemium", "platinum",
-                                                             "gold", "premium"})) + r")\s+acc?ou?n?t\b", re.I)
+                                                             "gold", "premium"})) + r")\s+(?:ac+o?u?n?t|profile)\b", re.I)
+# Order numbers Bitext wrote literally (not via placeholder), sometimes glued: "cancel purchase732201349959"
+LITERAL_ORDER_RE = re.compile(r"\b(?:order|purchase)\s*(?:number|no\.?)?\s*#?\s*(\d{5,})\b", re.I)
 
 
 def make_order_number(rng: random.Random) -> tuple[str, str]:
@@ -138,6 +140,8 @@ def main() -> None:
                 text, gt_order, hint_product = fill(r["instruction"], rrng)
                 if hint_product is None and (m := TIER_RE.search(text)):
                     hint_product = f"{m.group(1).lower()} account"   # tier written literally by Bitext
+                if gt_order is None and (m := LITERAL_ORDER_RE.search(text)):
+                    gt_order = m.group(1)                            # order number written literally
                 rows[split].append({
                     "id": r["id"],
                     "split": split,
