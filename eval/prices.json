@@ -1,0 +1,8 @@
+{
+  "source": "https://ai.google.dev/gemini-api/docs/pricing",
+  "checked": "2026-11-26",
+  "note": "Paid Standard tier list prices (USD). Output price includes thinking tokens. Our runs used the free tier, so cost = what the same tokens would cost on the paid tier.",
+  "models": {
+    "gemini-3.5-flash-lite": {"input_per_1m_usd": 0.30, "output_per_1m_usd": 2.50}
+  }
+}

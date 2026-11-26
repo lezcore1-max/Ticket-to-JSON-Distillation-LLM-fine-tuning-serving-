@@ -1,0 +1,391 @@
+{
+  "name": "Teacher (API)",
+  "predictions": "eval\\predictions\\teacher.jsonl",
+  "gold": "data/final/test.jsonl",
+  "n": 200,
+  "hardware": "Gemini API free tier, 1 message per request",
+  "notes": "gemini-3.5-flash-lite, prompt v3 with examples, structured output (JSON schema)",
+  "missing_predictions": 0,
+  "valid_json_strict": 1.0,
+  "valid_json_lenient": 1.0,
+  "schema_valid": 1.0,
+  "exact_match": 0.88,
+  "field_acc_mean": 0.9725,
+  "acc_intent": 0.945,
+  "acc_category": 0.99,
+  "acc_urgency": 0.945,
+  "acc_product": 1.0,
+  "acc_order_id": 1.0,
+  "acc_sentiment": 0.955,
+  "ci95": {
+    "exact_match": [
+      0.835,
+      0.925
+    ],
+    "field_acc_mean": [
+      0.96,
+      0.9833
+    ],
+    "acc_intent": [
+      0.91,
+      0.975
+    ],
+    "acc_category": [
+      0.975,
+      1.0
+    ],
+    "acc_urgency": [
+      0.915,
+      0.975
+    ],
+    "acc_product": [
+      1.0,
+      1.0
+    ],
+    "acc_order_id": [
+      1.0,
+      1.0
+    ],
+    "acc_sentiment": [
+      0.925,
+      0.98
+    ]
+  },
+  "urgency_by_class": {
+    "high": {
+      "acc": 0.8571,
+      "n": 14
+    },
+    "low": {
+      "acc": 0.9767,
+      "n": 86
+    },
+    "medium": {
+      "acc": 0.93,
+      "n": 100
+    }
+  },
+  "sentiment_by_class": {
+    "negative": {
+      "acc": 1.0,
+      "n": 11
+    },
+    "neutral": {
+      "acc": 0.9524,
+      "n": 189
+    }
+  },
+  "intent_macro_f1": 0.9449,
+  "order_id": {
+    "acc_when_present": 1.0,
+    "n_present": 22,
+    "false_alarm_rate": 0.0,
+    "n_null": 178
+  },
+  "product": {
+    "acc_when_present": 1.0,
+    "n_present": 27,
+    "false_alarm_rate": 0.0,
+    "n_null": 173
+  },
+  "latency_s": {
+    "p50": 2.345,
+    "p95": 9.126,
+    "n": 200
+  },
+  "cost_per_1k_requests": {
+    "usd": 0.842,
+    "mean_prompt_tokens": 2364.4,
+    "mean_output_tokens": 53.1,
+    "price_key": "gemini-3.5-flash-lite",
+    "price_source": "https://ai.google.dev/gemini-api/docs/pricing",
+    "price_checked": "2026-11-26"
+  },
+  "errors_sample": [
+    {
+      "id": "bx-01608",
+      "gold": {
+        "intent": "change_order",
+        "category": "order",
+        "urgency": "medium",
+        "product": null,
+        "order_id": "LK711897",
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "change_order",
+        "category": "order",
+        "urgency": "high",
+        "product": null,
+        "order_id": "LK711897",
+        "sentiment": "negative"
+      }
+    },
+    {
+      "id": "bx-02441",
+      "gold": {
+        "intent": "change_shipping_address",
+        "category": "shipping",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "change_shipping_address",
+        "category": "shipping",
+        "urgency": "low",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-02484",
+      "gold": {
+        "intent": "change_shipping_address",
+        "category": "shipping",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "change_shipping_address",
+        "category": "shipping",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "negative"
+      }
+    },
+    {
+      "id": "bx-02633",
+      "gold": {
+        "intent": "change_shipping_address",
+        "category": "shipping",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "set_up_shipping_address",
+        "category": "shipping",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-03739",
+      "gold": {
+        "intent": "check_cancellation_fee",
+        "category": "cancel",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "negative"
+      },
+      "pred": {
+        "intent": "check_cancellation_fee",
+        "category": "cancel",
+        "urgency": "low",
+        "product": null,
+        "order_id": null,
+        "sentiment": "negative"
+      }
+    },
+    {
+      "id": "bx-06717",
+      "gold": {
+        "intent": "check_refund_policy",
+        "category": "refund",
+        "urgency": "low",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "track_refund",
+        "category": "refund",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-07286",
+      "gold": {
+        "intent": "complaint",
+        "category": "feedback",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "complaint",
+        "category": "feedback",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "negative"
+      }
+    },
+    {
+      "id": "bx-07619",
+      "gold": {
+        "intent": "complaint",
+        "category": "feedback",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "complaint",
+        "category": "feedback",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "negative"
+      }
+    },
+    {
+      "id": "bx-07786",
+      "gold": {
+        "intent": "complaint",
+        "category": "feedback",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "complaint",
+        "category": "feedback",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "negative"
+      }
+    },
+    {
+      "id": "bx-07905",
+      "gold": {
+        "intent": "complaint",
+        "category": "feedback",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "check_refund_policy",
+        "category": "refund",
+        "urgency": "low",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-09134",
+      "gold": {
+        "intent": "contact_human_agent",
+        "category": "contact",
+        "urgency": "low",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "contact_human_agent",
+        "category": "contact",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "negative"
+      }
+    },
+    {
+      "id": "bx-10451",
+      "gold": {
+        "intent": "create_account",
+        "category": "account",
+        "urgency": "medium",
+        "product": "freemium account",
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "registration_problems",
+        "category": "account",
+        "urgency": "medium",
+        "product": "freemium account",
+        "order_id": null,
+        "sentiment": "negative"
+      }
+    },
+    {
+      "id": "bx-11209",
+      "gold": {
+        "intent": "delete_account",
+        "category": "account",
+        "urgency": "medium",
+        "product": "premium account",
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "check_cancellation_fee",
+        "category": "cancel",
+        "urgency": "medium",
+        "product": "premium account",
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-13558",
+      "gold": {
+        "intent": "delivery_period",
+        "category": "delivery",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "delivery_period",
+        "category": "delivery",
+        "urgency": "low",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-15251",
+      "gold": {
+        "intent": "get_invoice",
+        "category": "invoice",
+        "urgency": "low",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "check_invoice",
+        "category": "invoice",
+        "urgency": "low",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    }
+  ]
+}
