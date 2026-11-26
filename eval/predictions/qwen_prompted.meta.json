@@ -1,0 +1,13 @@
+{
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "dtype": "bfloat16",
+  "gpu": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+  "peak_mem_gib": 3.57,
+  "batch_size": 1,
+  "decoding": "greedy",
+  "max_new_tokens": 160,
+  "prompt_version": "v3",
+  "torch": "2.11.0+cu128",
+  "transformers": "5.24.1",
+  "python": "3.13.4"
+}
