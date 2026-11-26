@@ -35,6 +35,11 @@ NAMES = ["Priya Sharma", "John Miller", "Aisha Khan", "Carlos Gomez", "Mei Lin",
 CITIES = ["Mumbai", "Berlin", "Austin", "Toronto", "Lagos", "Sydney", "Madrid", "Seoul", "Chicago", "Delhi"]
 COUNTRIES = ["India", "Germany", "Canada", "Brazil", "Australia", "Spain", "Japan", "Kenya", "Mexico", "France"]
 CURRENCIES = ["$", "€", "£", "₹"]
+# Tier words Bitext itself writes before "account" (found by counting the word before "account"
+# in the raw data: standard 389, pro 265, freemium 247, platinum 243, gold 231, premium 230),
+# plus our own placeholder tiers. Tolerates small typos in "account" (acount, accout).
+TIER_RE = re.compile(r"\b(" + "|".join(sorted(set(TIERS) | {"standard", "pro", "freemium", "platinum",
+                                                             "gold", "premium"})) + r")\s+acc?ou?n?t\b", re.I)
 
 
 def make_order_number(rng: random.Random) -> tuple[str, str]:
@@ -131,6 +136,8 @@ def main() -> None:
                 # per-row RNG keyed on id -> filling is reproducible and independent of order
                 rrng = random.Random(zlib.crc32(f"{SEED}:{r['id']}".encode()))
                 text, gt_order, hint_product = fill(r["instruction"], rrng)
+                if hint_product is None and (m := TIER_RE.search(text)):
+                    hint_product = f"{m.group(1).lower()} account"   # tier written literally by Bitext
                 rows[split].append({
                     "id": r["id"],
                     "split": split,

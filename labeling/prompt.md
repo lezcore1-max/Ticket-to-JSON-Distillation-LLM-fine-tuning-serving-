@@ -19,13 +19,22 @@ Tie-breakers:
   use that request's intent. Use complaint only when filing/voicing a complaint IS the request.
 
 ## urgency  (low | medium | high)
-- high: the customer is blocked or losing money right now, or explicitly says it is urgent:
-  payment failed / charged twice, locked out of the account, order is late and they are upset,
-  words like "urgent", "asap", "immediately", "right now", or strong anger / profanity about a problem.
-- medium: a concrete action on their order, account, address or money is needed, without time pressure:
-  cancel/change an order, request a refund, change an address, delete an account, a sign-up error.
-- low: information requests and how-to questions: policies, options, payment methods, hours,
-  newsletter, leaving a review, "how do I ..." with no problem reported.
+Decide in two steps. Wording must not change the result: "would it be possible to report a
+sign-up problem" and "i have to report problems with signup" get the SAME urgency.
+
+Step 1: base level from WHAT is asked:
+- high: a problem with a payment (payment failed, payment error, charged twice / wrongly).
+- medium: an action on, or a problem with, something the customer already has: their order
+  (cancel, change, track, it has not arrived), their account (delete, edit, switch, recover
+  password, sign-up error), their money (get or track a refund), their address, or a complaint.
+- low: questions and how-to about general information: policies, options, fees, payment methods,
+  delivery times in general, invoices, contact details, the newsletter, reviews, creating an
+  account, placing a new order, reaching a human agent.
+
+Step 2: raise ONE level (never above high) if the customer
+- says it is urgent ("urgent", "asap", "immediately", "right now", "today"), or
+- is angry, uses profanity, or uses many "!" / "??", or
+- says they are blocked or losing money ("can't log in", "can't afford it", "need it for tomorrow").
 
 ## sentiment  (negative | neutral | positive)
 - negative: frustration, annoyance, anger, sarcasm, profanity, or complaining.
@@ -35,13 +44,16 @@ Tie-breakers:
 ## product  (string or null)
 The specific item, plan or account tier the customer names, as a short lowercase noun phrase
 without articles or possessives. Account tiers count: "my Gold account" -> "gold account".
-Generic words are NOT products: "order", "item", "product", "account", "purchase", "stuff" -> null.
+Generic words are NOT products: "order", "item", "product", "article", "account", "user account",
+"purchase", "package", "parcel", "delivery", "stuff" -> null.
+Fix obvious typos in the product name ("platnum acount" -> "platinum account").
 Do not copy order numbers, invoice numbers, amounts, names or places into product.
 
 ## order_id  (string or null)
 The order identifier exactly as written, but drop a leading "#" and surrounding words
 ("order #4521" -> "4521", "ORD-88213" -> "ORD-88213", "purchase AB123456" -> "AB123456").
-Invoice numbers, refund amounts, phone numbers and account numbers are NOT order ids -> null.
+Invoice numbers are NOT order ids, even when written with "#" ("invoice #20931" -> null).
+Refund amounts, phone numbers and account numbers are NOT order ids either -> null.
 If no order identifier is written, use null — never invent one.
 
 ## Examples
@@ -62,6 +74,18 @@ Message: please send me a copy of invoice INV-302118
 
 Message: want to close my Business account, how do i do that
 {"intent": "delete_account", "category": "account", "urgency": "medium", "product": "business account", "order_id": null, "sentiment": "neutral"}
+
+Message: how do i download invoice #20931
+{"intent": "get_invoice", "category": "invoice", "urgency": "low", "product": null, "order_id": null, "sentiment": "neutral"}
+
+Message: need to know when my package is going to arrive
+{"intent": "delivery_period", "category": "delivery", "urgency": "medium", "product": null, "order_id": null, "sentiment": "neutral"}
+
+Message: i would like to report an error with my payment
+{"intent": "payment_issue", "category": "payment", "urgency": "high", "product": null, "order_id": null, "sentiment": "neutral"}
+
+Message: can i upgrade to the platnum acount
+{"intent": "switch_account", "category": "account", "urgency": "medium", "product": "platinum account", "order_id": null, "sentiment": "neutral"}
 
 Message: your team sorted my issue so fast, thank you! where can i leave a review
 {"intent": "review", "category": "feedback", "urgency": "low", "product": null, "order_id": null, "sentiment": "positive"}
