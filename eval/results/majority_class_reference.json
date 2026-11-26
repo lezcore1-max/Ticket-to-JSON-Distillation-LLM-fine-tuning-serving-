@@ -1,0 +1,384 @@
+{
+  "name": "Majority class (reference)",
+  "predictions": "eval\\predictions\\majority.jsonl",
+  "gold": "data/final/test.jsonl",
+  "n": 200,
+  "hardware": "none",
+  "notes": "most common train value per field",
+  "missing_predictions": 0,
+  "valid_json_strict": 1.0,
+  "valid_json_lenient": 1.0,
+  "schema_valid": 1.0,
+  "exact_match": 0.0,
+  "field_acc_mean": 0.5533,
+  "acc_intent": 0.04,
+  "acc_category": 0.08,
+  "acc_urgency": 0.5,
+  "acc_product": 0.865,
+  "acc_order_id": 0.89,
+  "acc_sentiment": 0.945,
+  "ci95": {
+    "exact_match": [
+      0.0,
+      0.0
+    ],
+    "field_acc_mean": [
+      0.5358,
+      0.57
+    ],
+    "acc_intent": [
+      0.015,
+      0.07
+    ],
+    "acc_category": [
+      0.045,
+      0.12
+    ],
+    "acc_urgency": [
+      0.435,
+      0.57
+    ],
+    "acc_product": [
+      0.815,
+      0.91
+    ],
+    "acc_order_id": [
+      0.845,
+      0.93
+    ],
+    "acc_sentiment": [
+      0.91,
+      0.975
+    ]
+  },
+  "urgency_by_class": {
+    "high": {
+      "acc": 0.0,
+      "n": 14
+    },
+    "low": {
+      "acc": 0.0,
+      "n": 86
+    },
+    "medium": {
+      "acc": 1.0,
+      "n": 100
+    }
+  },
+  "sentiment_by_class": {
+    "negative": {
+      "acc": 0.0,
+      "n": 11
+    },
+    "neutral": {
+      "acc": 1.0,
+      "n": 189
+    }
+  },
+  "intent_macro_f1": 0.0028,
+  "order_id": {
+    "acc_when_present": 0.0,
+    "n_present": 22,
+    "false_alarm_rate": 0.0,
+    "n_null": 178
+  },
+  "product": {
+    "acc_when_present": 0.0,
+    "n_present": 27,
+    "false_alarm_rate": 0.0,
+    "n_null": 173
+  },
+  "latency_s": {
+    "p50": 0.0,
+    "p95": 0.0,
+    "n": 200
+  },
+  "cost_per_1k_requests": null,
+  "errors_sample": [
+    {
+      "id": "bx-00000",
+      "gold": {
+        "intent": "cancel_order",
+        "category": "order",
+        "urgency": "medium",
+        "product": null,
+        "order_id": "AY454462",
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "contact_human_agent",
+        "category": "contact",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-00029",
+      "gold": {
+        "intent": "cancel_order",
+        "category": "order",
+        "urgency": "medium",
+        "product": null,
+        "order_id": "6311729",
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "contact_human_agent",
+        "category": "contact",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-00140",
+      "gold": {
+        "intent": "cancel_order",
+        "category": "order",
+        "urgency": "medium",
+        "product": null,
+        "order_id": "259275",
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "contact_human_agent",
+        "category": "contact",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-00175",
+      "gold": {
+        "intent": "cancel_order",
+        "category": "order",
+        "urgency": "high",
+        "product": null,
+        "order_id": "55246098",
+        "sentiment": "negative"
+      },
+      "pred": {
+        "intent": "contact_human_agent",
+        "category": "contact",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-00200",
+      "gold": {
+        "intent": "cancel_order",
+        "category": "order",
+        "urgency": "medium",
+        "product": null,
+        "order_id": "39330228",
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "contact_human_agent",
+        "category": "contact",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-00211",
+      "gold": {
+        "intent": "cancel_order",
+        "category": "order",
+        "urgency": "medium",
+        "product": null,
+        "order_id": "RA173173",
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "contact_human_agent",
+        "category": "contact",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-00645",
+      "gold": {
+        "intent": "cancel_order",
+        "category": "order",
+        "urgency": "high",
+        "product": null,
+        "order_id": "973066",
+        "sentiment": "negative"
+      },
+      "pred": {
+        "intent": "contact_human_agent",
+        "category": "contact",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-00863",
+      "gold": {
+        "intent": "cancel_order",
+        "category": "order",
+        "urgency": "medium",
+        "product": null,
+        "order_id": "57605368",
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "contact_human_agent",
+        "category": "contact",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-01279",
+      "gold": {
+        "intent": "change_order",
+        "category": "order",
+        "urgency": "medium",
+        "product": null,
+        "order_id": "380071",
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "contact_human_agent",
+        "category": "contact",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-01328",
+      "gold": {
+        "intent": "change_order",
+        "category": "order",
+        "urgency": "medium",
+        "product": null,
+        "order_id": "387765",
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "contact_human_agent",
+        "category": "contact",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-01358",
+      "gold": {
+        "intent": "change_order",
+        "category": "order",
+        "urgency": "medium",
+        "product": null,
+        "order_id": "JC936078",
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "contact_human_agent",
+        "category": "contact",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-01608",
+      "gold": {
+        "intent": "change_order",
+        "category": "order",
+        "urgency": "medium",
+        "product": null,
+        "order_id": "LK711897",
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "contact_human_agent",
+        "category": "contact",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-01667",
+      "gold": {
+        "intent": "change_order",
+        "category": "order",
+        "urgency": "high",
+        "product": null,
+        "order_id": "99325802",
+        "sentiment": "negative"
+      },
+      "pred": {
+        "intent": "contact_human_agent",
+        "category": "contact",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-01787",
+      "gold": {
+        "intent": "change_order",
+        "category": "order",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "contact_human_agent",
+        "category": "contact",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-01844",
+      "gold": {
+        "intent": "change_order",
+        "category": "order",
+        "urgency": "medium",
+        "product": null,
+        "order_id": "ZA880507",
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "contact_human_agent",
+        "category": "contact",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    }
+  ]
+}
