@@ -79,6 +79,7 @@ def main() -> None:
     ap.add_argument("--lora-alpha", type=int, default=32)
     ap.add_argument("--lora-dropout", type=float, default=0.05)
     ap.add_argument("--oversample-factor", type=int, default=1)
+    ap.add_argument("--max-steps", type=int, default=-1)
     ap.add_argument("--no-grad-ckpt", action="store_true", help="disable gradient checkpointing (faster on >=16GB GPUs)")
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--local-files-only", action="store_true")
@@ -119,6 +120,7 @@ def main() -> None:
     )
     model = AutoModelForCausalLM.from_pretrained(
         args.model,
+        dtype=compute_dtype,
         quantization_config=bnb,
         device_map="cuda",
         local_files_only=args.local_files_only,
@@ -148,10 +150,11 @@ def main() -> None:
         lr_scheduler_type="cosine",
         warmup_steps=args.warmup_steps,
         max_length=args.max_length,
+        max_steps=args.max_steps,
         completion_only_loss=True,
         packing=False,
         bf16=use_bf16,
-        fp16=not use_bf16,
+        fp16=False,  # LoRA adapters are fp32; bnb_4bit_compute_dtype handles fp16 matmuls without GradScaler
         optim="paged_adamw_8bit",
         gradient_checkpointing=grad_ckpt,
         gradient_checkpointing_kwargs={"use_reentrant": False} if grad_ckpt else None,

@@ -60,7 +60,7 @@ def load_model(base_model: str, adapter_dir: Path, load_in_4bit: bool, local_fil
             bnb_4bit_compute_dtype=compute_dtype,
         )
         base = AutoModelForCausalLM.from_pretrained(
-            base_model, quantization_config=bnb, device_map="cuda", local_files_only=local_files_only
+            base_model, dtype=compute_dtype, quantization_config=bnb, device_map="cuda", local_files_only=local_files_only
         )
         model = PeftModel.from_pretrained(base, str(adapter_dir))
     else:
