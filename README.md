@@ -12,14 +12,14 @@ Output: {"intent": "track_order", "category": "order", "urgency": "high",
 **Pipeline:** Bitext messages → teacher LLM labels (Gemini, schema-validated) → QLoRA fine-tune of
 Qwen2.5-1.5B-Instruct (Unsloth) → vLLM + FastAPI (Docker, load-tested) → GGUF + Gradio demo.
 
-> 🚧 Work in progress: a 7-day build. Days 1–3 (data, labeling, reviewed test set, evaluation + baselines) are done.
+> 🚧 Work in progress: a 7-day build. Days 1–3 are done; Day 4 QLoRA Run 1 is complete (92.0% exact match, 100% schema-valid).
 
 ## Progress
 
 - [x] **Day 1:** dataset prep, output schema, teacher prompt, batched labeling pipeline, pilot report
 - [x] **Day 2:** all 3,500 messages labeled by the teacher; 200-message test set reviewed and corrected
 - [x] **Day 3:** evaluation script with self-test; baselines: teacher API, prompted Qwen2.5-1.5B, majority class
-- [ ] Day 4: QLoRA fine-tuning (2 runs) and DistilBERT baseline
+- [ ] Day 4: QLoRA fine-tuning (Run 1 done; Run 2 pending) and DistilBERT baseline
 - [ ] Day 5: vLLM + FastAPI + Docker serving, Locust load test
 - [ ] Day 6: GGUF export, Gradio demo on HF Spaces, cost per 1K requests
 - [ ] Day 7: final results, architecture diagram, write-up
@@ -34,14 +34,15 @@ Test set: 200 reviewed messages ([`data/final/test.jsonl`](data/final/test.jsonl
 |---|---|---|---|---|---|---|---|
 | Teacher (API) [1] | 88.0% <sub>(84–92)</sub> | 97.2% <sub>(96–98)</sub> | 100.0% | 100.0% | 93.0% | 9.13 s | $0.842 |
 | Small model, prompted [2] | 42.0% <sub>(35–49)</sub> | 82.6% <sub>(80–85)</sub> | 97.5% | 100.0% | 30.0% | 6.31 s | – |
-| Small model, fine-tuned (run 1) | – | – | – | – | – | – | – |
+| Small model, fine-tuned (run 1) [3] | 92.0% <sub>(88–96)</sub> | 98.3% <sub>(97–99)</sub> | 100.0% | 100.0% | 94.0% | 4.17 s | – |
 | Small model, fine-tuned (run 2) | – | – | – | – | – | – | – |
 | DistilBERT (categorical fields) | – | – | – | – | – | – | – |
-| Majority class (reference) [3] | 0.0% <sub>(0–0)</sub> | 55.3% <sub>(54–57)</sub> | 100.0% | 100.0% | 100.0% | – | – |
+| Majority class (reference) [4] | 0.0% <sub>(0–0)</sub> | 55.3% <sub>(54–57)</sub> | 100.0% | 100.0% | 100.0% | – | – |
 
 <sub>[1] gemini-3.5-flash-lite, prompt v3 with examples, structured output (JSON schema) — Gemini API free tier, 1 message per request</sub><br>
 <sub>[2] Qwen2.5-1.5B-Instruct, prompt v3 with examples, greedy, no constrained decoding — RTX 3050 Laptop 6GB, HF transformers bf16, batch 1</sub><br>
-<sub>[3] most common train value per field</sub><br>
+<sub>[3] Qwen2.5-1.5B-Instruct QLoRA (r=16, compact prompt, ckpt-376), greedy; trained on Colab T4 — RTX 3050 Laptop 6GB, merged bf16, batch 1</sub><br>
+<sub>[4] most common train value per field</sub><br>
 
 **Per-field accuracy**
 
@@ -49,6 +50,7 @@ Test set: 200 reviewed messages ([`data/final/test.jsonl`](data/final/test.jsonl
 |---|---|---|---|---|---|---|---|---|---|
 | Teacher (API) | 94.5% | 99.0% | 94.5% | 100.0% | 100.0% | 95.5% | 0.945 | 0.0% | 0.0% |
 | Small model, prompted | 78.0% | 94.0% | 59.0% | 88.0% | 99.5% | 77.0% | 0.760 | 0.6% | 13.9% |
+| Small model, fine-tuned (run 1) | 96.0% | 99.5% | 96.0% | 99.5% | 100.0% | 99.0% | 0.959 | 0.0% | 0.0% |
 | Majority class (reference) | 4.0% | 8.0% | 50.0% | 86.5% | 89.0% | 94.5% | 0.003 | 0.0% | 0.0% |
 
 <!-- results:end -->
@@ -143,6 +145,13 @@ python -m labeling.label --split train          # also: --split val, --split tes
 python -m labeling.label_stats                  # quality report for the full run
 python -m labeling.make_review_sheet            # test-set review sheet (CSV)
 python -m labeling.merge_review --reviewer human  # after reviewing -> data/final/
+
+# Day 4: QLoRA fine-tuning & evaluation (after installing GPU deps from requirements-gpu.txt)
+python -m training.train_qlora --run-name run1 --batch-size 8 --grad-accum 2
+python -m training.eval_qlora --checkpoints-dir training/checkpoints/run1 --pick-best --val-batch-size 32
+python -m training.eval_qlora --adapter training/checkpoints/run1/checkpoint-376 --split test --out eval/predictions/qwen_ft_run1.jsonl
+python -m eval.eval --pred eval/predictions/qwen_ft_run1.jsonl --name "Small model, fine-tuned (run 1)"
+python -m eval.make_table
 ```
 
 ## Repo layout

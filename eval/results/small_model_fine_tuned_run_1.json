@@ -1,0 +1,384 @@
+{
+  "name": "Small model, fine-tuned (run 1)",
+  "predictions": "eval\\predictions\\qwen_ft_run1.jsonl",
+  "gold": "data/final/test.jsonl",
+  "n": 200,
+  "hardware": "RTX 3050 Laptop 6GB, merged bf16, batch 1",
+  "notes": "Qwen2.5-1.5B-Instruct QLoRA (r=16, compact prompt, ckpt-376), greedy; trained on Colab T4",
+  "missing_predictions": 0,
+  "valid_json_strict": 1.0,
+  "valid_json_lenient": 1.0,
+  "schema_valid": 1.0,
+  "exact_match": 0.92,
+  "field_acc_mean": 0.9833,
+  "acc_intent": 0.96,
+  "acc_category": 0.995,
+  "acc_urgency": 0.96,
+  "acc_product": 0.995,
+  "acc_order_id": 1.0,
+  "acc_sentiment": 0.99,
+  "ci95": {
+    "exact_match": [
+      0.88,
+      0.955
+    ],
+    "field_acc_mean": [
+      0.9733,
+      0.9917
+    ],
+    "acc_intent": [
+      0.93,
+      0.985
+    ],
+    "acc_category": [
+      0.985,
+      1.0
+    ],
+    "acc_urgency": [
+      0.93,
+      0.985
+    ],
+    "acc_product": [
+      0.985,
+      1.0
+    ],
+    "acc_order_id": [
+      1.0,
+      1.0
+    ],
+    "acc_sentiment": [
+      0.975,
+      1.0
+    ]
+  },
+  "urgency_by_class": {
+    "high": {
+      "acc": 1.0,
+      "n": 14
+    },
+    "low": {
+      "acc": 0.9767,
+      "n": 86
+    },
+    "medium": {
+      "acc": 0.94,
+      "n": 100
+    }
+  },
+  "sentiment_by_class": {
+    "negative": {
+      "acc": 1.0,
+      "n": 11
+    },
+    "neutral": {
+      "acc": 0.9894,
+      "n": 189
+    }
+  },
+  "intent_macro_f1": 0.9585,
+  "order_id": {
+    "acc_when_present": 1.0,
+    "n_present": 22,
+    "false_alarm_rate": 0.0,
+    "n_null": 178
+  },
+  "product": {
+    "acc_when_present": 0.963,
+    "n_present": 27,
+    "false_alarm_rate": 0.0,
+    "n_null": 173
+  },
+  "latency_s": {
+    "p50": 1.903,
+    "p95": 4.167,
+    "n": 200
+  },
+  "cost_per_1k_requests": null,
+  "errors_sample": [
+    {
+      "id": "bx-00000",
+      "gold": {
+        "intent": "cancel_order",
+        "category": "order",
+        "urgency": "medium",
+        "product": null,
+        "order_id": "AY454462",
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "check_cancellation_fee",
+        "category": "cancel",
+        "urgency": "low",
+        "product": null,
+        "order_id": "AY454462",
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-00200",
+      "gold": {
+        "intent": "cancel_order",
+        "category": "order",
+        "urgency": "medium",
+        "product": null,
+        "order_id": "39330228",
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "track_order",
+        "category": "order",
+        "urgency": "medium",
+        "product": null,
+        "order_id": "39330228",
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-03739",
+      "gold": {
+        "intent": "check_cancellation_fee",
+        "category": "cancel",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "negative"
+      },
+      "pred": {
+        "intent": "check_cancellation_fee",
+        "category": "cancel",
+        "urgency": "high",
+        "product": null,
+        "order_id": null,
+        "sentiment": "negative"
+      }
+    },
+    {
+      "id": "bx-06717",
+      "gold": {
+        "intent": "check_refund_policy",
+        "category": "refund",
+        "urgency": "low",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "track_refund",
+        "category": "refund",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-07694",
+      "gold": {
+        "intent": "complaint",
+        "category": "feedback",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "complaint",
+        "category": "feedback",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "negative"
+      }
+    },
+    {
+      "id": "bx-07786",
+      "gold": {
+        "intent": "complaint",
+        "category": "feedback",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "complaint",
+        "category": "feedback",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "negative"
+      }
+    },
+    {
+      "id": "bx-09169",
+      "gold": {
+        "intent": "contact_human_agent",
+        "category": "contact",
+        "urgency": "low",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "contact_human_agent",
+        "category": "contact",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-10451",
+      "gold": {
+        "intent": "create_account",
+        "category": "account",
+        "urgency": "medium",
+        "product": "freemium account",
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "registration_problems",
+        "category": "account",
+        "urgency": "medium",
+        "product": "freemium account",
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-15605",
+      "gold": {
+        "intent": "get_invoice",
+        "category": "invoice",
+        "urgency": "low",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "check_invoice",
+        "category": "invoice",
+        "urgency": "low",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-17149",
+      "gold": {
+        "intent": "newsletter_subscription",
+        "category": "subscription",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "negative"
+      },
+      "pred": {
+        "intent": "newsletter_subscription",
+        "category": "subscription",
+        "urgency": "high",
+        "product": null,
+        "order_id": null,
+        "sentiment": "negative"
+      }
+    },
+    {
+      "id": "bx-19353",
+      "gold": {
+        "intent": "place_order",
+        "category": "order",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "negative"
+      },
+      "pred": {
+        "intent": "place_order",
+        "category": "order",
+        "urgency": "low",
+        "product": null,
+        "order_id": null,
+        "sentiment": "negative"
+      }
+    },
+    {
+      "id": "bx-19458",
+      "gold": {
+        "intent": "place_order",
+        "category": "order",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "negative"
+      },
+      "pred": {
+        "intent": "place_order",
+        "category": "order",
+        "urgency": "low",
+        "product": null,
+        "order_id": null,
+        "sentiment": "negative"
+      }
+    },
+    {
+      "id": "bx-24630",
+      "gold": {
+        "intent": "switch_account",
+        "category": "account",
+        "urgency": "medium",
+        "product": "platinum account",
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "switch_account",
+        "category": "account",
+        "urgency": "medium",
+        "product": "platinum proffile",
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-26094",
+      "gold": {
+        "intent": "track_refund",
+        "category": "refund",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "get_refund",
+        "category": "refund",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "id": "bx-26247",
+      "gold": {
+        "intent": "track_refund",
+        "category": "refund",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      },
+      "pred": {
+        "intent": "get_refund",
+        "category": "refund",
+        "urgency": "medium",
+        "product": null,
+        "order_id": null,
+        "sentiment": "neutral"
+      }
+    }
+  ]
+}
