@@ -1,5 +1,9 @@
-# Local GPU inference (Day 3+). Install torch from the CUDA index first:
+# Local GPU inference & fine-tuning (Day 3+). Install torch from the CUDA index first:
 #   pip install torch --index-url https://download.pytorch.org/whl/cu128
 #   pip install -r requirements-gpu.txt
 transformers>=4.46
 accelerate>=1.0
+peft>=0.14
+bitsandbytes>=0.45
+trl>=0.15
+scikit-learn>=1.5
