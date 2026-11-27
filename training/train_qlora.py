@@ -89,7 +89,8 @@ def main() -> None:
     if not torch.cuda.is_available():
         raise SystemExit("CUDA not available: install the CUDA build of torch")
 
-    use_bf16 = torch.cuda.is_bf16_supported()
+    # T4 (sm_75) reports is_bf16_supported()=True via emulation, which is slow; require Ampere+ (sm >= 8) for bf16.
+    use_bf16 = torch.cuda.get_device_capability(0)[0] >= 8 and torch.cuda.is_bf16_supported()
     compute_dtype = torch.bfloat16 if use_bf16 else torch.float16
     grad_ckpt = not args.no_grad_ckpt
 

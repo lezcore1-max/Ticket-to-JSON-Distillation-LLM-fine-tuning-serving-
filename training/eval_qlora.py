@@ -50,7 +50,8 @@ def load_model(base_model: str, adapter_dir: Path, load_in_4bit: bool, local_fil
     tok = AutoTokenizer.from_pretrained(base_model, local_files_only=local_files_only)
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
-    compute_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
+    use_bf16 = torch.cuda.get_device_capability(0)[0] >= 8 and torch.cuda.is_bf16_supported()
+    compute_dtype = torch.bfloat16 if use_bf16 else torch.float16
     if load_in_4bit:
         bnb = BitsAndBytesConfig(
             load_in_4bit=True,
