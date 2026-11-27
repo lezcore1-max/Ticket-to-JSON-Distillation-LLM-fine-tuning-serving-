@@ -24,7 +24,6 @@ PLANNED = [
     "Teacher (API)",
     "Small model, prompted",
     "Small model, fine-tuned (run 1)",
-    "Small model, fine-tuned (run 2)",
     "DistilBERT (categorical fields)",
     "Majority class (reference)",
 ]

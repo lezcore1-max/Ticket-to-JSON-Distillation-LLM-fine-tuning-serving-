@@ -1,0 +1,12 @@
+{
+  "model": "distilbert-base-uncased",
+  "dtype": "bfloat16",
+  "gpu": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+  "peak_mem_gib": 0.79,
+  "batch_size": 1,
+  "epochs": 8,
+  "train_seconds": 73.4,
+  "torch": "2.11.0+cu128",
+  "transformers": "5.24.1",
+  "python": "3.13.4"
+}
