@@ -10,9 +10,9 @@ Output: {"intent": "track_order", "category": "order", "urgency": "high",
 ```
 
 **Pipeline:** Bitext messages → teacher LLM labels (Gemini, schema-validated) → QLoRA fine-tune of
-Qwen2.5-1.5B-Instruct (Unsloth) → vLLM + FastAPI (Docker, load-tested) → GGUF + Gradio demo.
+Qwen2.5-1.5B-Instruct (PEFT + bitsandbytes + TRL) → vLLM + FastAPI (Docker, load-tested) → GGUF (`Q4_K_M`) + Gradio demo.
 
-> 🚧 Work in progress: a 7-day build. Days 1–6 (data, labeling, reviewed test set, evaluation, QLoRA fine-tuning, DistilBERT baseline, vLLM + FastAPI serving, GGUF export, Gradio demo, cost / 1K) are done.
+> **Final result:** Distilling `gemini-3.5-flash-lite` into `Qwen2.5-1.5B-Instruct` improved exact match from **42.0% → 92.0%** (beating the teacher's **88.0%**), cut p95 latency **9.1×** (**9.13 s → 1.00 s**), and reduced inference cost **42×** (**\$0.842 → \$0.020 / 1K requests** on cloud GPU, or **\$0.000** on CPU HF Spaces via `Q4_K_M` GGUF at **90.0%**).
 
 ## Progress
 
@@ -22,7 +22,7 @@ Qwen2.5-1.5B-Instruct (Unsloth) → vLLM + FastAPI (Docker, load-tested) → GGU
 - [x] **Day 4:** QLoRA fine-tuning of Qwen2.5-1.5B (92.0% exact match, 100% schema-valid) and DistilBERT baseline (70.5%)
 - [x] **Day 5:** vLLM + FastAPI + Docker serving (1.00 s p95, 7.29 req/s under 10 users, 0% errors)
 - [x] **Day 6:** GGUF `Q4_K_M` export (940 MiB, 90.0% exact match on CPU), Gradio demo (`demo/`), cost/1K ($0.020 vs $0.842)
-- [ ] Day 7: final results, architecture diagram, write-up
+- [x] **Day 7:** architecture diagram, error analysis, and final project write-up
 
 ## Results
 
@@ -61,6 +61,27 @@ Test set: 200 reviewed messages ([`data/final/test.jsonl`](data/final/test.jsonl
 | Majority class (reference) | 4.0% | 8.0% | 50.0% | 86.5% | 89.0% | 94.5% | 0.003 | 0.0% | 0.0% |
 
 <!-- results:end -->
+
+## Architecture
+
+```mermaid
+flowchart LR
+    A["Bitext Raw (26,872)"] --> B["prepare_data.py - Template dedupe + 3000/300/200 split"]
+    B --> C["label.py - Gemini 3.5 Flash-Lite (batch 20, prompt v3)"]
+    C --> D["test_review.csv + merge_review.py - 200 reviewed test tickets"]
+    D --> E["train_qlora.py - Qwen2.5-1.5B NF4 QLoRA (r=16, 292-tok prompt)"]
+    E --> F["checkpoint-376 (Epoch 2) - merge_model.py (2.89 GiB bf16)"]
+    F --> G["Docker vLLM + FastAPI - Guided JSON + validate.py - 1.00s p95, 7.29 req/s, $0.020/1K"]
+    F --> H["export_gguf.py -> Q4_K_M (940 MiB) - Gradio Demo (CPU) - 2.41s p95, 90.0% EM, $0.000/1K"]
+```
+
+## Key findings & error analysis
+
+1. **Distillation denoised the teacher (`92.0%` vs `88.0%` exact match):** Training on 3,000 batch-20 teacher labels (91.0% batch consistency) with Epoch-2 early stopping (`checkpoint-376`: `95.33%` val exact match vs `94.67%` at Epoch 3) and completion-only loss smoothed out per-request teacher variance. The biggest jump was `sentiment` (`95.5%` → `99.0%`), where the student internalized Bitext's neutral-complaint rule, alongside `urgency` (`94.5%` → `96.0%`, `high` 14/14 = `100%`). *(Note: 95% CIs on `n=200` overlap slightly [`88–96` vs `84–92`], and the student is specialized to Bitext phrasing whereas the generalist teacher remains stronger out-of-distribution.)*
+2. **Prompt compression + vLLM cut latency 9.1× and cost 42×:** Replacing the `2,364`-token few-shot teacher prompt with a `292`-token compact prompt (`training/dataset.py`) cut HF `transformers` p95 latency from `6.31 s` to `4.17 s`. Serving the merged model with vLLM (`guided_json`) + FastAPI dropped p95 latency to **`1.00 s`** (`0.873 s` p50) and sustained **7.29 req/s** across 10 concurrent Locust users with **0.00%** failures ([load test report](serving/load_test_report.md)) — **`$0.020 / 1K`** on reference `g4dn.xlarge` pricing vs **`$0.842 / 1K`** for the Teacher API ([`eval/compute_cost.py`](eval/compute_cost.py)).
+3. **Why generative distillation beats an encoder classifier (`92.0%` vs `70.5%`):** `distilbert-base-uncased` reached `97.0%` `intent` accuracy (`0.970` macro-F1) in `23 ms` p95, but hit a hard ceiling at `70.5%` exact match because it cannot extract free-text `product` or `order_id` values (~22% of test tickets).
+4. **CPU quantization tradeoff (`92.0% bf16` → `90.0% Q4_K_M`):** Quantizing to `940.4 MiB` `Q4_K_M` GGUF enables `2.41 s` p95 inference on 8 CPU threads (`$0.000 / 1K` on free HF Spaces), still beating the Teacher API (`88.0%`) while trading 2 points on unconstrained schema edges (`98.0%` schema-valid) and `high` urgency (`78.6%`).
+5. **Remaining errors (16 / 200 test tickets in Run 1 / vLLM):** Nearly all remaining misses are near-neighbor Bitext intent boundaries (`get_refund` vs `track_refund`, `get_invoice` vs `check_invoice`, `create_account` vs `registration_problems`), borderline `medium` vs `low`/`high` urgency, and 1 un-normalized product typo (`"platinum proffile"`).
 
 ## Output schema
 
@@ -184,10 +205,10 @@ python -m demo.app
 data/        prepared/ splits, labeled/ teacher labels, review/ test sheet,
              final/ training-ready data (train/val: teacher, test: reviewed)
 labeling/    schema, taxonomy, teacher prompt, data prep, labeler, reports, review + merge
-training/    QLoRA fine-tuning (Day 4)
-eval/        evaluation script (Day 3)
-serving/     FastAPI + vLLM + Docker + Locust (Day 5)
-demo/        Gradio app for HF Spaces (Day 6)
+training/    compact dataset formatter, QLoRA trainer + eval, DistilBERT baseline (Day 4)
+eval/        unified scorer, self-test, README table generator, cost script, results (Days 3–6)
+serving/     LoRA merge, FastAPI + vLLM + Docker Compose, Locust load test & report (Day 5)
+demo/        Q4_K_M GGUF exporter, CPU evaluator, Gradio app for HF Spaces (Day 6)
 ```
 
 ## License
