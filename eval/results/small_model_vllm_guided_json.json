@@ -93,7 +93,13 @@
     "p95": 1.0,
     "n": 200
   },
-  "cost_per_1k_requests": null,
+  "cost_per_1k_requests": {
+    "usd": 0.0201,
+    "rps": 7.29,
+    "requests_per_hour": 26234,
+    "gpu_usd_per_hour": 0.526,
+    "reference": "AWS EC2 g4dn.xlarge on-demand (us-east-1, 1x T4 16GB)"
+  },
   "errors_sample": [
     {
       "id": "bx-00000",

@@ -1,0 +1,8 @@
+{
+  "source_model": "serving/merged_model",
+  "quant": "Q4_K_M",
+  "gguf_file": "demo/models/ticket-qwen2.5-1.5b-q4_k_m.gguf",
+  "size_mib": 940.4,
+  "export_seconds": 132.7,
+  "docker_image": "ghcr.io/ggml-org/llama.cpp:full"
+}
