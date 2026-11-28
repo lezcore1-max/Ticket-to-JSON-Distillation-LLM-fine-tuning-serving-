@@ -15,6 +15,7 @@ data/raw/
 # Model artifacts (pushed to HF Hub instead)
 outputs/
 checkpoints/
+serving/merged_model/
 *.safetensors
 *.bin
 *.gguf

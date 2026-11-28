@@ -1,0 +1,47 @@
+services:
+  vllm:
+    image: vllm/vllm-openai:latest
+    command:
+      - --model
+      - /model
+      - --served-model-name
+      - ticket-json
+      - --dtype
+      - bfloat16
+      - --max-model-len
+      - "1024"
+      - --gpu-memory-utilization
+      - "0.78"
+      - --max-num-seqs
+      - "16"
+    volumes:
+      - ./merged_model:/model:ro
+    ports:
+      - "8000:8000"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 18
+      start_period: 30s
+
+  api:
+    build:
+      context: ..
+      dockerfile: serving/Dockerfile
+    environment:
+      VLLM_URL: http://vllm:8000
+      MODEL_NAME: ticket-json
+    ports:
+      - "8080:8080"
+    depends_on:
+      vllm:
+        condition: service_healthy
+
